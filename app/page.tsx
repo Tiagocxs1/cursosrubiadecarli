@@ -200,6 +200,8 @@ export default function HomePage() {
           email: data.get('email'),
           origem: 'site - formulário ebook',
           fonte: 'ebook_homepage',
+          grupoWhatsapp: data.get('grupo_whatsapp') ? 'sim' : 'não',
+          receberDicas: data.get('receber_dicas') ? 'sim' : 'não',
           ...getTrackingData(),
         }),
       });
@@ -531,11 +533,11 @@ export default function HomePage() {
                       
                       <div className="space-y-3 pt-4">
                         <label className="flex items-start gap-3 cursor-pointer group">
-                          <input type="checkbox" className="mt-1 w-5 h-5 text-[#D4AF37] border-gray-300 rounded focus:ring-[#D4AF37] focus:ring-2" />
+                          <input type="checkbox" name="grupo_whatsapp" value="sim" className="mt-1 w-5 h-5 text-[#D4AF37] border-gray-300 rounded focus:ring-[#D4AF37] focus:ring-2" />
                           <span className="text-sm text-[#4A3F35] group-hover:text-[#1A1A1A] transition-colors">Quero fazer parte do grupo exclusivo de WhatsApp para troca de conhecimentos em Tricologia</span>
                         </label>
                         <label className="flex items-start gap-3 cursor-pointer group">
-                          <input type="checkbox" className="mt-1 w-5 h-5 text-[#D4AF37] border-gray-300 rounded focus:ring-[#D4AF37] focus:ring-2" />
+                          <input type="checkbox" name="receber_dicas" value="sim" className="mt-1 w-5 h-5 text-[#D4AF37] border-gray-300 rounded focus:ring-[#D4AF37] focus:ring-2" />
                           <span className="text-sm text-[#4A3F35] group-hover:text-[#1A1A1A] transition-colors">Desejo receber dicas exclusivas e atualizações sobre novos cursos</span>
                         </label>
                       </div>

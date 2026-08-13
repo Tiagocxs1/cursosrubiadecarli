@@ -22,6 +22,12 @@ const EMAILS = {
   dev: process.env.DEV_EMAIL || 'tiagocxs.tdb@gmail.com',
 };
 
+function mapCheckbox(v: string): string {
+  if (v === 'sim') return '✅ Sim';
+  if (v === 'não' || v === 'nao') return '❌ Não';
+  return v;
+}
+
 function buildHtml(data: Record<string, unknown>) {
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
@@ -42,6 +48,8 @@ function buildHtml(data: Record<string, unknown>) {
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Site/Página</td><td style="padding:8px;border:1px solid #ddd;">${(data.urlOrigem as string) || 'cursos.rubiadecarli.com.br'}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Data/Hora</td><td style="padding:8px;border:1px solid #ddd;">${data.dataHora as string}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dispositivo</td><td style="padding:8px;border:1px solid #ddd;">${(data.dispositivo as string) || 'desktop'}</td></tr>
+        ${data.grupoWhatsapp ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Grupo WhatsApp Tricologia</td><td style="padding:8px;border:1px solid #ddd;">${mapCheckbox(data.grupoWhatsapp as string)}</td></tr>` : ''}
+        ${data.receberDicas ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dicas & novos cursos</td><td style="padding:8px;border:1px solid #ddd;">${mapCheckbox(data.receberDicas as string)}</td></tr>` : ''}
       </table>
       ${isEbook ? `<p style="margin-top:16px;padding:12px;background:#FDF6E3;border-left:4px solid #B8952E;color:#333;">📖 <strong>Ação:</strong> encaminhe o link do e-book para o lead e chame no WhatsApp informando que o material já foi enviado e que está disponível para tirar todas as dúvidas sobre os cursos.</p>` : ''}
     </div>
@@ -55,7 +63,9 @@ export async function sendLeadEmail(data: Record<string, unknown>) {
     return;
   }
 
-  const from = process.env.EMAIL_FROM || 'mkt@tsdigitais.com';
+  const fromEmail = process.env.EMAIL_FROM || 'mkt@tsdigitais.com';
+  const fromName = process.env.EMAIL_FROM_NAME || 'Mkt TS Digitais | Cursos Dra. Rúbia De Carli';
+  const from = `"${fromName}" <${fromEmail}>`;
   const to = [EMAILS.contato, EMAILS.dra, EMAILS.dev].join(', ');
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');

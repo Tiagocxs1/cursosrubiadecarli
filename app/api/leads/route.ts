@@ -29,6 +29,8 @@ export async function POST(req: Request) {
       origem: origem || fonte || 'site',
       fonte: fonte || '',
       curso: curso || '',
+      grupoWhatsapp: body.grupoWhatsapp || '',
+      receberDicas: body.receberDicas || '',
       dataHora: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', dateStyle: 'full', timeStyle: 'short' }),
       dataISO: new Date().toISOString(),
       urlOrigem: body.urlOrigem
@@ -108,7 +110,9 @@ async function sendTelegram(data: Record<string, unknown>) {
     `📝 *Assunto:* ${assunto}\n` +
     `🌐 *Site/Página:* ${pagina}\n` +
     `📅 *Data/Hora:* ${data.dataHora}\n` +
-    `🔗 *Origem:* ${siteLabel}`;
+    `🔗 *Origem:* ${siteLabel}` +
+    (mapCheckboxGroup(data) ? `\n💬 *Grupo WhatsApp:* ${mapCheckboxGroup(data)}` : '') +
+    (mapCheckboxDicas(data) ? `\n📣 *Dicas/Cursos:* ${mapCheckboxDicas(data)}` : '');
 
   try {
     await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -123,4 +127,18 @@ async function sendTelegram(data: Record<string, unknown>) {
   } catch (err) {
     console.error('Falha no Telegram:', err);
   }
+}
+
+function mapCheckboxGroup(data: Record<string, unknown>): string {
+  const v = (data.grupoWhatsapp as string) || (data['checkbox_grupo_whatsapp'] as string) || '';
+  if (v === 'sim') return '✅ Sim';
+  if (v === 'não' || v === 'nao') return '❌ Não';
+  return '';
+}
+
+function mapCheckboxDicas(data: Record<string, unknown>): string {
+  const v = (data.receberDicas as string) || (data['checkbox_receber_dicas'] as string) || '';
+  if (v === 'sim') return '✅ Sim';
+  if (v === 'não' || v === 'nao') return '❌ Não';
+  return '';
 }
