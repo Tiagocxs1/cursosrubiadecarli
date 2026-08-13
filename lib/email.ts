@@ -39,6 +39,7 @@ function buildHtml(data: Record<string, unknown>) {
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Curso</td><td style="padding:8px;border:1px solid #ddd;">${(data.curso as string) || '—'}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Mensagem</td><td style="padding:8px;border:1px solid #ddd;">${(data.mensagem as string) || 'Não informado'}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Origem</td><td style="padding:8px;border:1px solid #ddd;">${(data.origem as string) || (data.urlOrigem as string)}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Site/Página</td><td style="padding:8px;border:1px solid #ddd;">${(data.urlOrigem as string) || 'cursos.rubiadecarli.com.br'}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Data/Hora</td><td style="padding:8px;border:1px solid #ddd;">${data.dataHora as string}</td></tr>
         <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dispositivo</td><td style="padding:8px;border:1px solid #ddd;">${(data.dispositivo as string) || 'desktop'}</td></tr>
       </table>

@@ -31,7 +31,11 @@ export async function POST(req: Request) {
       curso: curso || '',
       dataHora: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', dateStyle: 'full', timeStyle: 'short' }),
       dataISO: new Date().toISOString(),
-      urlOrigem: body.urlOrigem || req.headers.get('origin') || 'cursos.rubiadecarli.com.br',
+      urlOrigem: body.urlOrigem
+        ? (body.urlOrigem as string).startsWith('http')
+          ? body.urlOrigem
+          : `https://cursos.rubiadecarli.com.br${(body.urlOrigem as string).startsWith('/') ? '' : '/'}${body.urlOrigem}`
+        : (req.headers.get('origin') || 'https://cursos.rubiadecarli.com.br') + (req.headers.get('referer') ? new URL(req.headers.get('referer') as string).pathname : ''),
       midia: body.midia || '',
       campanha: body.campanha || '',
       conteudo: body.conteudo || '',
@@ -94,6 +98,7 @@ async function sendTelegram(data: Record<string, unknown>) {
   if (!botToken || !chatId) return;
 
   const siteLabel = (data.origem as string) || (data.urlOrigem as string) || 'cursos.rubiadecarli.com.br';
+  const pagina = (data.urlOrigem as string) || 'cursos.rubiadecarli.com.br';
   const assunto = (data.procedimento as string) || 'Contato Site';
 
   const texto = `🚀 *NOVO LEAD - ${siteLabel.toUpperCase()}*\n\n` +
@@ -101,8 +106,9 @@ async function sendTelegram(data: Record<string, unknown>) {
     `📧 *E-mail:* ${data.email}\n` +
     `📱 *Zap:* [${data.whatsapp}](https://wa.me/${(data.whatsapp as string)?.replace(/\D/g, '')})\n` +
     `📝 *Assunto:* ${assunto}\n` +
+    `🌐 *Site/Página:* ${pagina}\n` +
     `📅 *Data/Hora:* ${data.dataHora}\n` +
-    `🌐 *Origem:* ${siteLabel}`;
+    `🔗 *Origem:* ${siteLabel}`;
 
   try {
     await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
