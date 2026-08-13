@@ -369,8 +369,8 @@ export default function EnhancedCoursePageTemplate({
               </FadeIn>
             </div>
 
-            <FadeIn delay={0.2} className="relative group cursor-pointer pointer-events-auto">
-              <div onClick={() => { setVideoModalOpen(true); playChime(); }} className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#2A2A2A]">
+            <FadeIn delay={0.2} className="relative group">
+              <div className={`relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#2A2A2A] ${video?.url ? 'cursor-pointer' : ''}`} onClick={video?.url ? () => { setVideoModalOpen(true); playChime(); } : undefined}>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
                 <Image
                   fill
@@ -380,14 +380,16 @@ export default function EnhancedCoursePageTemplate({
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
 
-                <div className="absolute inset-0 flex items-center justify-center z-20">
-                  <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-[#D4AF37] transition-all duration-500">
-                    <Play className="w-8 h-8 text-white ml-1" />
+                {video?.url && (
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
+                    <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-[#D4AF37] transition-all duration-500">
+                      <Play className="w-8 h-8 text-white ml-1" />
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="absolute bottom-8 left-8 z-20">
-                  <p className="text-[#D4AF37] tracking-widest text-sm uppercase mb-2">{video?.label ?? 'Assistir Teaser'}</p>
+                  <p className="text-[#D4AF37] tracking-widest text-sm uppercase mb-2">{video?.url ? (video?.label ?? 'Assistir Teaser') : 'O Curso'}</p>
                   <p className="text-2xl font-light">{video?.title ?? courseName}</p>
                 </div>
               </div>
