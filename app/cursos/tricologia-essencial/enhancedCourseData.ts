@@ -15,6 +15,7 @@ export const tricologiaEnhancedData: EnhancedCoursePageTemplateProps = {
     title: "O Universo Capilar",
     url: "",
     platform: "youtube",
+    image: "https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/curso_tricologia_essencial.png",
   },
   hero: {
     titlePrefix: "Tricologia",

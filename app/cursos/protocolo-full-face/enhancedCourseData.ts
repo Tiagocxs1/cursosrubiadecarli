@@ -15,6 +15,7 @@ export const protocoloFullFaceEnhancedData: EnhancedCoursePageTemplateProps = {
     title: "A Revolução Full Face",
     url: "",
     platform: "youtube",
+    image: "https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/protocolo_fullface_capa2.png",
   },
   hero: {
     titlePrefix: "Protocolo",

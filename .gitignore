@@ -32,3 +32,4 @@ yarn-error.log*
 
 # clerk tmp cache
 /.clerk/.tmp/
+.vercel

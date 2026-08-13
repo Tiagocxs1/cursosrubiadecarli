@@ -158,6 +158,7 @@ export type VideoSection = {
   label?: string;
   url: string;
   platform: 'youtube' | 'vimeo';
+  image?: string;
 };
 
 export type Testimonial = {
@@ -373,9 +374,9 @@ export default function EnhancedCoursePageTemplate({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
                 <Image
                   fill
-                  src="https://images.unsplash.com/photo-1614859324967-bdf471b421ff?auto=format&fit=crop&q=80&w=800"
-                  alt="Aplicação"
-                  className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700 group-hover:scale-105"
+                  src={video?.image ?? "https://images.unsplash.com/photo-1614859324967-bdf471b421ff?auto=format&fit=crop&q=80&w=800"}
+                  alt={video?.title ?? courseName}
+                  className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
 
