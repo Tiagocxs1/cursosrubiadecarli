@@ -1,0 +1,68 @@
+# Dra. Rúbia De Carli — Cursos Profissionais
+
+> Plataforma de cursos presenciais em Tricologia e Biomedicina Estética ministrados pela Dra. Rúbia De Carli (CRBM 2144), referência nacional com mais de 10 anos de experiência e 500+ alunos formados.
+
+## Sobre
+
+- **Domínio:** cursos.rubiadecarli.com.br
+- **Localização:** Caxias do Sul, RS — Brasil
+- **Formato:** Cursos presenciais (imersão)
+- **Público-alvo:** Biomédicos, fisioterapeutas, enfermeiros e profissionais de saúde
+- **Contato comercial:** WhatsApp +55 54 99235-0352
+
+## Instrutora
+
+**Dra. Rúbia De Carli**
+- Biomédica Estética (CRBM 2144)
+- Especialista em Tricologia (IAT — International Association of Trichologists)
+- Formação internacional em Face/Londres
+- 2 pós-graduações na área
+- 500+ alunos formados | 98% de satisfação
+
+## Cursos Disponíveis
+
+### Tricologia Essencial
+- **Formato:** Presencial — 3 módulos (5 horas)
+- **Valor:** R$ 997
+- **Conteúdo:**
+  - Módulo 1: Anatomia Capilar (1h) — estrutura do couro cabeludo, fibra capilar, distúrbios
+  - Módulo 2: Tricoses — Doenças e anormalidades da haste (3h) — diagnóstico e tratamentos
+  - Módulo 3: Alopecia não cicatriciais (1h) — AAG, eflúvio telógeno, alopecia areata
+- **Certificação:** Garantida após conclusão
+- **Inscrições:** /cursos/tricologia
+
+### Protocolo Full Face
+- **Formato:** Presencial — imersão de 3 dias (12 horas)
+- **Valor:** R$ 2.997
+- **Conteúdo:**
+  - Toxina Botulínica Global — suavização de linhas de expressão
+  - Preenchedores com Ácido Hialurônico — reposição de volume
+  - Bioestimuladores de Colágeno — rejuvenescimento profundo
+  - Técnica Fullips London Face — preenchimento labial
+  - Preenchimento Orbicular Skin — área periorbital
+- **Certificação:** Garantida após conclusão
+- **Inscrições:** /cursos/protocolo-full-face
+
+## Materiais Gratuitos
+
+- Ebook: "Guia de Tricologia Essencial" (45 páginas) — disponível via formulário na homepage (/#ebooks)
+
+## Blog
+
+- Artigos científicos e educativos sobre Tricologia, Biomedicina Estética e Harmonização Facial
+- Publicados pela Dra. Rúbia De Carli e equipe
+- Acesso gratuito em: /blog
+
+## Depoimentos
+
+- Maria Luiza (Biomédica): "Aprendi imensamente com seu vasto conhecimento e didática clara."
+- Gabriela Rigo (Aluna): "O curso foi excepcional, cheio de conhecimentos e comprovações científicas."
+- Camila Morh (Aluna): "Uma profissional altamente qualificada e dedicada a manter-se atualizada."
+
+## Links Principais
+
+- [Homepage](/)
+- [Tricologia Essencial](/cursos/tricologia)
+- [Protocolo Full Face](/cursos/protocolo-full-face)
+- [Blog](/blog)
+- [Conteúdo Completo para IA](/llms-full.txt)

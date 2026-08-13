@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#FAF9F8"/>
+  <circle cx="400" cy="250" r="220" fill="#D4AF37" opacity="0.025"/>
+
+  <!-- Scalp top-view - head silhouette -->
+  <ellipse cx="400" cy="245" rx="210" ry="195" fill="#F5EDD8" stroke="#E0D0BC" stroke-width="1.5"/>
+
+  <!-- ===== LEFT SIDE: Normal density ===== -->
+  <!-- Dense hair follicles dots pattern - left hemisphere -->
+  <!-- Row 1 -->
+  <circle cx="230" cy="155" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="258" cy="148" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="286" cy="145" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="314" cy="143" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="342" cy="142" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="370" cy="142" r="4" fill="#3A2F25" opacity="0.7"/>
+  <!-- Row 2 -->
+  <circle cx="218" cy="183" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="246" cy="176" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="274" cy="172" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="302" cy="170" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="330" cy="169" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="358" cy="168" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="384" cy="167" r="4" fill="#3A2F25" opacity="0.7"/>
+  <!-- Row 3 -->
+  <circle cx="210" cy="212" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="238" cy="205" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="266" cy="200" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="294" cy="198" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="322" cy="196" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="350" cy="195" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="378" cy="195" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <!-- Row 4 -->
+  <circle cx="206" cy="242" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="234" cy="235" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="262" cy="230" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="290" cy="228" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="318" cy="226" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="346" cy="226" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="374" cy="225" r="4" fill="#3A2F25" opacity="0.7"/>
+  <!-- Row 5 -->
+  <circle cx="210" cy="272" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="238" cy="265" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="266" cy="260" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="294" cy="258" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="322" cy="257" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="350" cy="256" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="378" cy="256" r="4" fill="#3A2F25" opacity="0.7"/>
+  <!-- Row 6 -->
+  <circle cx="218" cy="302" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="246" cy="296" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="274" cy="291" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="302" cy="289" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="330" cy="288" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="358" cy="288" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="384" cy="288" r="4" fill="#3A2F25" opacity="0.7"/>
+  <!-- Row 7 -->
+  <circle cx="228" cy="332" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="256" cy="326" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="284" cy="322" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="312" cy="320" r="4.5" fill="#3A2F25" opacity="0.75"/>
+  <circle cx="340" cy="320" r="4" fill="#3A2F25" opacity="0.7"/>
+  <circle cx="368" cy="320" r="4" fill="#3A2F25" opacity="0.7"/>
+
+  <!-- Label normal -->
+  <text x="290" y="430" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.5" letter-spacing="2">NORMAL</text>
+
+  <!-- ===== DIVIDER LINE ===== -->
+  <line x1="400" y1="60" x2="400" y2="430" stroke="#D4AF37" stroke-width="1" stroke-dasharray="6 4" opacity="0.4"/>
+
+  <!-- ===== RIGHT SIDE: Alopecia (sparse, miniaturized) ===== -->
+  <!-- Sparse miniaturized follicles - fewer, smaller, lighter -->
+  <!-- Row 1 -->
+  <circle cx="430" cy="148" r="2" fill="#4A3F35" opacity="0.3"/>
+  <circle cx="458" cy="144" r="2.5" fill="#4A3F35" opacity="0.35"/>
+  <circle cx="512" cy="142" r="1.5" fill="#4A3F35" opacity="0.25"/>
+  <circle cx="566" cy="148" r="2" fill="#4A3F35" opacity="0.3"/>
+  <!-- Row 2 -->
+  <circle cx="418" cy="178" r="2" fill="#4A3F35" opacity="0.28"/>
+  <circle cx="470" cy="172" r="2.5" fill="#4A3F35" opacity="0.35"/>
+  <circle cx="540" cy="170" r="2" fill="#4A3F35" opacity="0.28"/>
+  <circle cx="592" cy="178" r="2.5" fill="#4A3F35" opacity="0.3"/>
+  <!-- Row 3 - AGA zone (very sparse) -->
+  <circle cx="424" cy="208" r="1.5" fill="#4A3F35" opacity="0.22"/>
+  <circle cx="484" cy="202" r="2" fill="#4A3F35" opacity="0.28"/>
+  <circle cx="556" cy="200" r="1.5" fill="#4A3F35" opacity="0.22"/>
+  <!-- Row 4 - central thinning area -->
+  <circle cx="430" cy="240" r="1.5" fill="#4A3F35" opacity="0.2"/>
+  <circle cx="500" cy="236" r="2" fill="#4A3F35" opacity="0.25"/>
+  <circle cx="570" cy="240" r="1.5" fill="#4A3F35" opacity="0.2"/>
+  <!-- Row 5 -->
+  <circle cx="420" cy="272" r="2" fill="#4A3F35" opacity="0.28"/>
+  <circle cx="472" cy="265" r="2.5" fill="#4A3F35" opacity="0.32"/>
+  <circle cx="544" cy="263" r="2" fill="#4A3F35" opacity="0.28"/>
+  <circle cx="595" cy="270" r="1.5" fill="#4A3F35" opacity="0.22"/>
+  <!-- Row 6 -->
+  <circle cx="430" cy="302" r="2" fill="#4A3F35" opacity="0.3"/>
+  <circle cx="486" cy="296" r="2.5" fill="#4A3F35" opacity="0.35"/>
+  <circle cx="556" cy="295" r="2" fill="#4A3F35" opacity="0.3"/>
+  <!-- Row 7 -->
+  <circle cx="442" cy="330" r="2.5" fill="#4A3F35" opacity="0.32"/>
+  <circle cx="506" cy="325" r="2" fill="#4A3F35" opacity="0.28"/>
+  <circle cx="565" cy="324" r="2.5" fill="#4A3F35" opacity="0.32"/>
+
+  <!-- Thinning zone highlight (AGA pattern) -->
+  <ellipse cx="510" cy="218" rx="70" ry="50" fill="#D4AF37" opacity="0.06" stroke="#D4AF37" stroke-width="0.8" stroke-dasharray="4 4"/>
+
+  <!-- Label alopecia -->
+  <text x="510" y="430" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#D4AF37" opacity="0.6" letter-spacing="2">ALOPECIA</text>
+
+  <!-- Magnification circles (dermoscopy) -->
+  <circle cx="218" cy="226" r="32" fill="none" stroke="#D4AF37" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.25"/>
+  <circle cx="510" cy="218" r="32" fill="none" stroke="#D4AF37" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.25"/>
+
+  <!-- Bottom label -->
+  <text x="400" y="457" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#4A3F35" opacity="0.7" letter-spacing="3">ALOPECIAS NÃO CICATRICIAIS</text>
+  <line x1="220" y1="465" x2="580" y2="465" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Gold corners -->
+  <path d="M30 30 L70 30 L70 34 L34 34 L34 70 L30 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 30 L730 30 L730 34 L766 34 L766 70 L770 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M30 470 L70 470 L70 466 L34 466 L34 430 L30 430 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 470 L730 470 L730 466 L766 466 L766 430 L770 430 Z" fill="#D4AF37" opacity="0.4"/>
+</svg>

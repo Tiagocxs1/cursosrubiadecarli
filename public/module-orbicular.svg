@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#FAF9F8"/>
+
+  <!-- Background glow -->
+  <circle cx="400" cy="240" r="200" fill="#D4AF37" opacity="0.03"/>
+  <circle cx="580" cy="150" r="100" fill="#D4AF37" opacity="0.03"/>
+
+  <!-- Left eye - detailed periorbital area -->
+  <!-- Orbital bone area (subtle) -->
+  <ellipse cx="280" cy="240" rx="120" ry="80" fill="#F5EDE0" opacity="0.6" stroke="#E8DDD5" stroke-width="1"/>
+
+  <!-- Under-eye shadow (before - darker) -->
+  <ellipse cx="280" cy="275" rx="65" ry="22" fill="#D4B898" opacity="0.25"/>
+
+  <!-- Eye whites -->
+  <ellipse cx="280" cy="240" rx="75" ry="35" fill="white" stroke="#4A3F35" stroke-width="1.8"/>
+
+  <!-- Iris -->
+  <circle cx="280" cy="240" r="22" fill="#4A3F35" opacity="0.75"/>
+  <circle cx="280" cy="240" r="14" fill="#3A2F25" opacity="0.9"/>
+  <!-- Pupil -->
+  <circle cx="280" cy="240" r="7" fill="#1A1A1A"/>
+  <!-- Iris highlight -->
+  <circle cx="274" cy="234" r="4" fill="white" opacity="0.35"/>
+
+  <!-- Upper eyelid -->
+  <path d="M205 240 Q240 210 280 208 Q320 210 355 240"
+        stroke="#4A3F35" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Lower eyelid -->
+  <path d="M205 240 Q240 268 280 272 Q320 268 355 240"
+        stroke="#4A3F35" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Eyelashes upper (simplified) -->
+  <path d="M218 235 L214 225" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M232 225 L230 215" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M248 220 L248 210" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M264 218 L265 208" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M280 217 L281 207" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M296 218 L298 208" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M312 220 L315 210" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M326 225 L330 216" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M340 233 L345 224" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Eyebrow -->
+  <path d="M210 205 Q255 188 330 200" stroke="#4A3F35" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Brightening effect rays (under eye) -->
+  <line x1="280" y1="290" x2="260" y2="310" stroke="#D4AF37" stroke-width="1" opacity="0.3"/>
+  <line x1="280" y1="290" x2="280" y2="315" stroke="#D4AF37" stroke-width="1" opacity="0.35"/>
+  <line x1="280" y1="290" x2="300" y2="310" stroke="#D4AF37" stroke-width="1" opacity="0.3"/>
+  <line x1="280" y1="290" x2="250" y2="305" stroke="#D4AF37" stroke-width="0.8" opacity="0.25"/>
+  <line x1="280" y1="290" x2="310" y2="305" stroke="#D4AF37" stroke-width="0.8" opacity="0.25"/>
+
+  <!-- Gold glow under eye -->
+  <ellipse cx="280" cy="285" rx="60" ry="18" fill="#D4AF37" opacity="0.07"/>
+
+  <!-- Divider -->
+  <line x1="430" y1="130" x2="430" y2="390" stroke="#E8DDD5" stroke-width="1" opacity="0.6"/>
+
+  <!-- Right eye - after effect (brighter, lifted) -->
+  <ellipse cx="570" cy="230" rx="120" ry="80" fill="#F5EDE0" opacity="0.6" stroke="#E8DDD5" stroke-width="1"/>
+
+  <!-- Under-eye (after - brighter, no shadow) -->
+  <ellipse cx="570" cy="265" rx="65" ry="18" fill="#D4AF37" opacity="0.06"/>
+
+  <!-- Eye whites -->
+  <ellipse cx="570" cy="230" rx="75" ry="35" fill="white" stroke="#4A3F35" stroke-width="1.8"/>
+
+  <!-- Iris -->
+  <circle cx="570" cy="230" r="22" fill="#4A3F35" opacity="0.75"/>
+  <circle cx="570" cy="230" r="14" fill="#3A2F25" opacity="0.9"/>
+  <circle cx="570" cy="230" r="7" fill="#1A1A1A"/>
+  <circle cx="564" cy="224" r="4" fill="white" opacity="0.35"/>
+
+  <!-- Upper eyelid - slightly lifted -->
+  <path d="M495 230 Q530 198 570 196 Q610 198 645 230"
+        stroke="#4A3F35" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Lower eyelid -->
+  <path d="M495 230 Q530 258 570 260 Q610 258 645 230"
+        stroke="#4A3F35" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Eyelashes -->
+  <path d="M507 225 L503 215" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M521 215 L519 205" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M537 210 L537 200" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M554 207 L555 197" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M570 206 L571 196" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M586 207 L588 197" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M602 210 L605 200" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M616 215 L620 206" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M629 223 L634 214" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Eyebrow - lifted -->
+  <path d="M500 193 Q545 174 620 186" stroke="#4A3F35" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Stars/sparkle effect under right eye (rejuvenation) -->
+  <path d="M543 278 L545 272 L547 278 L553 280 L547 282 L545 288 L543 282 L537 280 Z" fill="#D4AF37" opacity="0.5"/>
+  <path d="M590 275 L591.5 271 L593 275 L597 276.5 L593 278 L591.5 282 L590 278 L586 276.5 Z" fill="#D4AF37" opacity="0.4"/>
+  <circle cx="570" cy="285" r="2" fill="#D4AF37" opacity="0.4"/>
+
+  <!-- Labels -->
+  <text x="280" y="400" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.4" letter-spacing="2">ANTES</text>
+  <text x="570" y="400" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.4" letter-spacing="2">DEPOIS</text>
+
+  <!-- Bottom label -->
+  <text x="400" y="455" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#4A3F35" opacity="0.7" letter-spacing="3">PREENCHIMENTO ORBICULAR SKIN</text>
+  <line x1="220" y1="463" x2="580" y2="463" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Gold corners -->
+  <path d="M30 30 L70 30 L70 34 L34 34 L34 70 L30 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 30 L730 30 L730 34 L766 34 L766 70 L770 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M30 470 L70 470 L70 466 L34 466 L34 430 L30 430 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 470 L730 470 L730 466 L766 466 L766 430 L770 430 Z" fill="#D4AF37" opacity="0.4"/>
+</svg>

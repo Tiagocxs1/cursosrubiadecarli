@@ -1,0 +1,31 @@
+# ai.txt — Dra. Rúbia De Carli | Cursos Profissionais
+# Protocolo de permissões para agentes de IA e LLMs
+# Referência: https://site.attrakt.com/ai-txt/
+
+# Identificação
+Site: https://cursos.rubiadecarli.com.br
+Contact: contato@rubiadecarli.com.br
+
+# Uso não-comercial e pesquisa (permitido)
+Use-case: research
+Permission: allow
+
+# Respostas a usuários em chatbots (permitido)
+Use-case: ai-responses
+Permission: allow
+
+# Treinamento de modelos (sob solicitação)
+Use-case: training
+Permission: require-permission
+Contact: contato@rubiadecarli.com.br
+
+# Raspagem massiva de dados (não permitido)
+Use-case: scraping
+Permission: disallow
+
+# Atribuição obrigatória
+Attribution-required: true
+Attribution-url: https://cursos.rubiadecarli.com.br
+
+# Direitos autorais
+Copyright: 2026 Dra. Rúbia De Carli. Todos os direitos reservados.

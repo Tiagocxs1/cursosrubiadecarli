@@ -1,0 +1,7 @@
+# ads.txt — Authorized Digital Sellers
+# https://iabtechlab.com/ads-txt/
+# Atualizado em: 2026-03-28
+#
+# Nenhum inventário de anúncios programáticos autorizado no momento.
+# Este arquivo será atualizado caso campanhas de display sejam ativadas.
+placeholder.example.com, placeholder, DIRECT

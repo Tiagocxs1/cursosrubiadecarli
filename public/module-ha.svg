@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#FAF9F8"/>
+
+  <!-- Background glow -->
+  <circle cx="400" cy="250" r="220" fill="#D4AF37" opacity="0.03"/>
+  <circle cx="180" cy="100" r="140" fill="#D4AF37" opacity="0.04"/>
+  <circle cx="620" cy="400" r="100" fill="#D4AF37" opacity="0.04"/>
+
+  <!-- Face outline - profile/3/4 view -->
+  <ellipse cx="400" cy="255" rx="145" ry="170" fill="white" stroke="#E8DDD5" stroke-width="1.5"/>
+
+  <!-- Cheek volume indicators - left -->
+  <ellipse cx="318" cy="310" rx="45" ry="35" fill="#D4AF37" opacity="0.08" stroke="#D4AF37" stroke-width="1" stroke-dasharray="4 3"/>
+  <!-- Cheek volume indicators - right -->
+  <ellipse cx="482" cy="310" rx="45" ry="35" fill="#D4AF37" opacity="0.08" stroke="#D4AF37" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <!-- Volume arrows - cheeks -->
+  <!-- Left cheek outward arrow -->
+  <path d="M285 310 L262 310" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+  <path d="M270 303 L262 310 L270 317" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Right cheek outward arrow -->
+  <path d="M515 310 L538 310" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+  <path d="M530 303 L538 310 L530 317" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Eyes -->
+  <ellipse cx="355" cy="268" rx="24" ry="13" fill="none" stroke="#4A3F35" stroke-width="1.8"/>
+  <ellipse cx="445" cy="268" rx="24" ry="13" fill="none" stroke="#4A3F35" stroke-width="1.8"/>
+  <circle cx="356" cy="268" r="7" fill="#4A3F35" opacity="0.65"/>
+  <circle cx="446" cy="268" r="7" fill="#4A3F35" opacity="0.65"/>
+  <!-- Eyebrows -->
+  <path d="M331 248 Q355 240 379 245" stroke="#4A3F35" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M421 245 Q445 240 469 248" stroke="#4A3F35" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Nose -->
+  <path d="M393 290 Q388 320 376 330 Q400 337 424 330 Q412 320 407 290" stroke="#4A3F35" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Lips - fuller/volumized -->
+  <path d="M368 360 Q385 350 400 348 Q415 350 432 360" stroke="#4A3F35" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M368 360 Q385 376 400 379 Q415 376 432 360" fill="#D4AF37" opacity="0.12" stroke="#4A3F35" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cupid's bow detail -->
+  <path d="M383 360 Q392 354 400 356 Q408 354 417 360" stroke="#4A3F35" stroke-width="1.2" fill="none"/>
+
+  <!-- Syringe top-right -->
+  <g transform="translate(590, 160) rotate(20)">
+    <rect x="-8" y="-55" width="16" height="65" rx="3" fill="white" stroke="#D4AF37" stroke-width="1.5"/>
+    <rect x="-6" y="-72" width="12" height="20" rx="2" fill="#D4AF37" opacity="0.3"/>
+    <rect x="-10" y="-75" width="20" height="6" rx="2" fill="#D4AF37" opacity="0.5"/>
+    <rect x="-1.5" y="10" width="3" height="30" rx="1" fill="#C0A030"/>
+    <path d="M-1.5 40 L1.5 40 L0 50 Z" fill="#C0A030"/>
+    <line x1="-8" y1="-25" x2="-3" y2="-25" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
+    <line x1="-8" y1="-8" x2="-3" y2="-8" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
+    <line x1="-8" y1="7" x2="-3" y2="7" stroke="#D4AF37" stroke-width="1" opacity="0.6"/>
+  </g>
+
+  <!-- HA molecule dots (stylized) -->
+  <circle cx="580" cy="270" r="4" fill="#D4AF37" opacity="0.5"/>
+  <circle cx="594" cy="260" r="3" fill="#D4AF37" opacity="0.4"/>
+  <circle cx="570" cy="258" r="3" fill="#D4AF37" opacity="0.4"/>
+  <circle cx="586" cy="248" r="2.5" fill="#D4AF37" opacity="0.3"/>
+  <line x1="580" y1="270" x2="594" y2="260" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+  <line x1="580" y1="270" x2="570" y2="258" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+  <line x1="594" y1="260" x2="586" y2="248" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+  <line x1="570" y1="258" x2="586" y2="248" stroke="#D4AF37" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Label: HA -->
+  <text x="600" y="300" font-family="Georgia, serif" font-size="28" font-style="italic" fill="#D4AF37" opacity="0.25" letter-spacing="2">HA</text>
+
+  <!-- Bottom label -->
+  <text x="400" y="455" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#4A3F35" opacity="0.7" letter-spacing="3">ÁCIDO HIALURÔNICO</text>
+  <line x1="290" y1="463" x2="510" y2="463" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Gold corners -->
+  <path d="M30 30 L70 30 L70 34 L34 34 L34 70 L30 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 30 L730 30 L730 34 L766 34 L766 70 L770 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M30 470 L70 470 L70 466 L34 466 L34 430 L30 430 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 470 L730 470 L730 466 L766 466 L766 430 L770 430 Z" fill="#D4AF37" opacity="0.4"/>
+</svg>
