@@ -435,7 +435,7 @@ export default function HomePage() {
               <FadeIn className="order-2 md:order-1 relative group pointer-events-auto">
                 <div className="relative rounded-t-full rounded-b-[2rem] overflow-hidden aspect-[3/4] border border-[#D4AF37]/20 bg-[#2A2A2A]">
                   <div className="absolute inset-0 bg-[#D4AF37]/10 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-1000" />
-                  <Image fill src="https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/rubia2.jpg" alt="Dra. Rúbia" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+                  <Image fill src="https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/drarubiadecarli.jpg" alt="Dra. Rúbia" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
                 </div>
               </FadeIn>
 
