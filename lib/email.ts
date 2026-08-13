@@ -55,7 +55,7 @@ export async function sendLeadEmail(data: Record<string, unknown>) {
     return;
   }
 
-  const from = process.env.SMTP_USER || 'contato@rubiadecarli.com.br';
+  const from = process.env.EMAIL_FROM || 'mkt@tsdigitais.com';
   const to = [EMAILS.contato, EMAILS.dra, EMAILS.dev].join(', ');
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
