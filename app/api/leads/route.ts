@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { sendLeadEmail } from '@/lib/email';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
 const supabaseKey =
@@ -72,6 +73,12 @@ export async function POST(req: Request) {
     }
 
     await sendTelegram(payload);
+
+    try {
+      await sendLeadEmail(payload);
+    } catch (emailError) {
+      console.error('Falha ao enviar e-mail do lead:', emailError);
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {
