@@ -16,14 +16,15 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { nome, email, whatsapp, curso, assunto, mensagem, origem, fonte } = body;
 
-    if (!nome || !email || !whatsapp) {
+    const isNewsletter = fonte === 'newsletter_footer' || origem === 'site - newsletter footer';
+    if (!nome || !email || (!whatsapp && !isNewsletter)) {
       return NextResponse.json({ error: 'Campos obrigatórios faltando' }, { status: 400 });
     }
 
     const payload = {
       nome,
       email,
-      whatsapp,
+      whatsapp: whatsapp || '',
       procedimento: curso || assunto || origem || fonte || 'Contato Site',
       mensagem: mensagem || '',
       origem: origem || fonte || 'site',
