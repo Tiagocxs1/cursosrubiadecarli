@@ -64,7 +64,7 @@ export async function sendLeadEmail(data: Record<string, unknown>) {
   }
 
   const fromEmail = process.env.EMAIL_FROM || 'mkt@tsdigitais.com';
-  const fromName = process.env.EMAIL_FROM_NAME || 'Mkt TS Digitais | Cursos Dra. Rúbia De Carli';
+  const fromName = process.env.EMAIL_FROM_NAME || 'MKT | Cursos Rúbia De Carli';
   const from = `"${fromName}" <${fromEmail}>`;
   const to = [EMAILS.contato, EMAILS.dra, EMAILS.dev].join(', ');
   const fonte = (data.fonte as string) || (data.origem as string) || '';
