@@ -50,12 +50,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ cou
       stripeCustomer = await db.stripeCustomer.create({ data: { userid: user.id, stripeCustomerId: customer.id } })
     }
 
+    const appUrl = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
+
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomer.stripeCustomerId,
       line_items,
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?cancelled=1`,
+      success_url: `${appUrl}/courses/${course.id}?success=1`,
+      cancel_url: `${appUrl}/courses/${course.id}?cancelled=1`,
       metadata: {
         courseId: course.id,
         userId: user.id,

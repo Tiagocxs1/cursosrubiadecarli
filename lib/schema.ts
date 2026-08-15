@@ -7,7 +7,7 @@
  * Referência: https://schema.org
  */
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br';
+const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 const WHATSAPP = 'https://wa.me/5554992350352';
 
 // ---------------------------------------------------------------------------

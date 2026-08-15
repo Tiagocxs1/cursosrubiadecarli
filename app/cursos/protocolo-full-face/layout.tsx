@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import JsonLd from '@/components/json-ld';
 import { buildCourseSchema, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br';
+const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
 export const metadata: Metadata = {
   title: 'Curso Protocolo Full Face — Imersão Presencial | Dra. Rúbia De Carli',

@@ -12,10 +12,13 @@ import { buildOrganizationSchema, buildPersonSchema } from '@/lib/schema'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br';
+const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'Dra. Rúbia De Carli — Cursos Presenciais em Tricologia e Biomedicina Estética',
     template: '%s | Dra. Rúbia De Carli',

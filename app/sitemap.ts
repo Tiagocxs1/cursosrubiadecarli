@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getPublishedPosts } from '@/lib/blog';
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br';
+const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

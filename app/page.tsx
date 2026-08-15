@@ -301,41 +301,33 @@ export default function HomePage() {
 
         {/* FRAME 1: HERO */}
         <section className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-12 text-center">
-          <FadeIn>
-            <p className="text-[#D4AF37] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm md:text-base mb-4 sm:mb-6 font-semibold">
-              Masterclass Exclusiva
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-[#1A1A1A] mb-4 sm:mb-6 drop-shadow-sm">
-              Cursos Profissionais em <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#B8952E]">Tricologia e Biomedicina Estética</span>
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <p className="text-base sm:text-xl md:text-2xl text-[#4A3F35] max-w-2xl mx-auto font-light leading-relaxed mb-8 sm:mb-12">
-              Aprenda com uma referência na área e eleve sua carreira a um novo patamar de excelência
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.3}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button
-                onClick={() => { playChime(); openWhatsApp('hero_garantir_vaga'); }}
-                onMouseEnter={playChime}
-                className="group relative px-8 py-4 bg-[#1A1A1A] text-white overflow-hidden rounded-full transition-all hover:scale-105 shadow-2xl shadow-[#D4AF37]/20 pointer-events-auto"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#B8952E] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-                <span className="relative z-10 flex items-center gap-3 text-sm tracking-widest uppercase">
-                  GARANTIR MINHA VAGA <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-              <a
-                href="#cursos"
-                className="border border-[#D4AF37] text-[#D4AF37] px-8 py-4 rounded-full text-lg font-light hover:bg-[#D4AF37] hover:text-white transition-all duration-300"
-              >
-                Ver Cursos
-              </a>
-            </div>
-          </FadeIn>
+          <p className="text-[#D4AF37] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-xs sm:text-sm md:text-base mb-4 sm:mb-6 font-semibold">
+            Masterclass Exclusiva
+          </p>
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-[#1A1A1A] mb-4 sm:mb-6 drop-shadow-sm">
+            Cursos Profissionais em <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#B8952E]">Tricologia e Biomedicina Estética</span>
+          </h1>
+          <p className="text-base sm:text-xl md:text-2xl text-[#4A3F35] max-w-2xl mx-auto font-light leading-relaxed mb-8 sm:mb-12">
+            Aprenda com uma referência na área e eleve sua carreira a um novo patamar de excelência
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button
+              onClick={() => { playChime(); openWhatsApp('hero_garantir_vaga'); }}
+              onMouseEnter={playChime}
+              className="group relative px-8 py-4 bg-[#1A1A1A] text-white overflow-hidden rounded-full transition-all hover:scale-105 shadow-2xl shadow-[#D4AF37]/20 pointer-events-auto"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#B8952E] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
+              <span className="relative z-10 flex items-center gap-3 text-sm tracking-widest uppercase">
+                GARANTIR MINHA VAGA <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+            <a
+              href="#cursos"
+              className="border border-[#D4AF37] text-[#D4AF37] px-8 py-4 rounded-full text-lg font-light hover:bg-[#D4AF37] hover:text-white transition-all duration-300"
+            >
+              Ver Cursos
+            </a>
+          </div>
         </section>
 
         {/* FRAME 2: APRESENTAÇÃO + IMAGEM */}
