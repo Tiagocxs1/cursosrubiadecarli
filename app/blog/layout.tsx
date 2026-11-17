@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
 export const metadata: Metadata = {
-  title: 'Blog — Tricologia e Biomedicina Estética | Dra. Rúbia De Carli',
+  title: 'Blog',
   description:
     'Artigos especializados em Tricologia, Biomedicina Estética e Harmonização Facial. Conteúdo científico e atualizado por Dra. Rúbia De Carli, CRBM 2144.',
   alternates: {

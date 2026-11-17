@@ -45,7 +45,7 @@ const faq = [
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Curso Full Face Presencial em Caxias do Sul',
-    description: 'Imersão presencial de 3 dias em harmonização facial, com prática supervisionada em Caxias do Sul. Conheça os módulos, o investimento e as próximas turmas.'
+    description: 'Imersão presencial de 3 dias em harmonização facial, com prática supervisionada em Caxias do Sul. Conheça os módulos, o investimento e as próximas turmas.',
     keywords: ['protocolo full face', 'harmonização facial Caxias do Sul', 'curso harmonização facial presencial', 'Dra. Rúbia De Carli', 'bioestimuladores colágeno', 'toxina botulínica curso', 'preenchedores ácido hialurônico'],
     authors: [{ name: 'Dra. Rúbia De Carli', url: BASE_URL }],
     alternates: { canonical: `${BASE_URL}${COURSE_URL}` },
@@ -55,7 +55,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: `${BASE_URL}${COURSE_URL}`,
       siteName: 'Cursos Dra. Rúbia De Carli',
       title: 'Curso Full Face Presencial em Caxias do Sul | Dra. Rúbia De Carli',
-      description: 'Imersão presencial de 3 dias em harmonização facial, com prática supervisionada em Caxias do Sul, RS.'
+      description: 'Imersão presencial de 3 dias em harmonização facial, com prática supervisionada em Caxias do Sul, RS.',
       images: [{
         url: 'https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/protocolo_fullface_capa2.png',
         width: 1200,
@@ -66,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title: 'Curso Full Face Presencial em Caxias do Sul',
-      description: 'Imersão presencial de 3 dias em harmonização facial em Caxias do Sul, RS.'
+      description: 'Imersão presencial de 3 dias em harmonização facial em Caxias do Sul, RS.',
       images: ['https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/protocolo_fullface_capa2.png'],
     },
     robots: { index: true, follow: true },

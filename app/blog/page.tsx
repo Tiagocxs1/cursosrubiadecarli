@@ -10,7 +10,7 @@ export const revalidate = 300;
 export async function generateMetadata(): Promise<Metadata> {
   const posts = await getPublishedPosts(1);
   return {
-    title: 'Artigos sobre Tricologia e Biomedicina Estética | Dra. Rúbia De Carli',
+    title: 'Artigos sobre Tricologia e Biomedicina Estética',
     description: 'Conteúdo especializado em Tricologia e Biomedicina Estética por Dra. Rúbia De Carli.',
     alternates: { canonical: 'https://cursos.rubiadecarli.com.br/blog' },
     robots: { index: posts.length > 0, follow: true },

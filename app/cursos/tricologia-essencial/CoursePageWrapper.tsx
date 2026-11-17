@@ -45,7 +45,7 @@ const faq = [
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Curso de Tricologia Presencial em Caxias do Sul',
-    description: 'Aprenda anatomia capilar, tricoses e alopecias em 5 horas de formação presencial com a Dra. Rúbia De Carli, em Caxias do Sul. Consulte as próximas turmas.'
+    description: 'Aprenda anatomia capilar, tricoses e alopecias em 5 horas de formação presencial com a Dra. Rúbia De Carli, em Caxias do Sul. Consulte as próximas turmas.',
     keywords: ['curso tricologia', 'tricologia Caxias do Sul', 'curso tricologia presencial', 'Dra. Rúbia De Carli', 'alopecia androgenética tratamento', 'tricologia essencial', 'certificação tricologia'],
     authors: [{ name: 'Dra. Rúbia De Carli', url: BASE_URL }],
     alternates: { canonical: `${BASE_URL}${COURSE_URL}` },
@@ -66,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       title: 'Curso de Tricologia Presencial em Caxias do Sul',
-      description: 'Formação presencial em Tricologia em Caxias do Sul, RS.'
+      description: 'Formação presencial em Tricologia em Caxias do Sul, RS.',
       images: ['https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/curso_tricologia_essencial.png'],
     },
     robots: { index: true, follow: true },
