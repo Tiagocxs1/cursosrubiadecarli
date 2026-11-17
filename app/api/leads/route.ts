@@ -54,7 +54,7 @@ export async function POST(req: Request) {
     if (supabase) {
       try {
         const organizationId = process.env.SUPABASE_ORGANIZATION_ID?.replace(/\\n/g, '').trim() || 'CURSOS_RUBIA';
-        await supabase.from('customers').insert({
+        const { error: insertError } = await supabase.from('customers').insert({
           full_name: nome,
           phone: whatsapp,
           email,
@@ -72,6 +72,9 @@ export async function POST(req: Request) {
             dispositivo: payload.dispositivo,
           },
         });
+        if (insertError) {
+          console.error('Erro ao salvar lead no Supabase:', insertError.message);
+        }
       } catch (supabaseError) {
         console.error('Erro ao salvar no Supabase:', supabaseError);
       }

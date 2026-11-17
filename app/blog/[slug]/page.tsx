@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const image = post.cover_image ?? '/drarubiadecarli.jpg';
 
   return {
-    title: `${post.title} | Blog Dra. Rúbia De Carli`,
+    title: `${post.title} | Blog`,
     description: post.excerpt ?? post.title,
     alternates: { canonical: `${BASE_URL}${url}` },
     openGraph: {
@@ -175,7 +175,7 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/cursos/tricologia"
+                href="/cursos/tricologia-essencial"
                 className="px-6 py-3 bg-[#D4AF37] text-white font-semibold rounded-full hover:bg-[#B8952E] transition-colors text-sm"
               >
                 Ver Curso de Tricologia
