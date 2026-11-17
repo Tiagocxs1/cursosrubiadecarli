@@ -34,7 +34,7 @@ const gtmBootstrap = [
   '  j.async=true;',
   "  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;",
   '  f.parentNode.insertBefore(j,f);',
-  "})(window,document,'script','dataLayer','" + GTM_ID + "');",
+  '})(window,document,"script","dataLayer","' + GTM_ID + '");',
 ].join('\n');
 
 const ga4Bootstrap = [
