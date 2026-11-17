@@ -28,6 +28,22 @@ function mapCheckbox(v: string): string {
   return v;
 }
 
+
+function escapeHtml(value: unknown): string {
+  const entities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return String(value ?? '').replace(/[&<>"']/g, (char) => entities[char]);
+}
+
+function safeHeader(value: unknown, maxLength = 160): string {
+  return String(value ?? '').replace(/[\r\n]+/g, ' ').trim().slice(0, maxLength);
+}
+
 function buildHtml(data: Record<string, unknown>) {
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
@@ -38,18 +54,18 @@ function buildHtml(data: Record<string, unknown>) {
       <h2 style="color:#B8952E;">${titulo}</h2>
       <p style="color:#333;">Um novo lead foi registrado no site de cursos da Dra. Rúbia De Carli.</p>
       <table style="width:100%;border-collapse:collapse;margin-top:12px;">
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Nome</td><td style="padding:8px;border:1px solid #ddd;">${data.nome as string}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">E-mail</td><td style="padding:8px;border:1px solid #ddd;">${data.email as string}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">WhatsApp</td><td style="padding:8px;border:1px solid #ddd;"><a href="https://wa.me/${(data.whatsapp as string)?.replace(/\D/g, '')}">${data.whatsapp as string}</a></td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Assunto</td><td style="padding:8px;border:1px solid #ddd;">${(data.procedimento as string) || 'Contato Site'}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Curso</td><td style="padding:8px;border:1px solid #ddd;">${(data.curso as string) || '—'}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Mensagem</td><td style="padding:8px;border:1px solid #ddd;">${(data.mensagem as string) || 'Não informado'}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Origem</td><td style="padding:8px;border:1px solid #ddd;">${(data.origem as string) || (data.urlOrigem as string)}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Site/Página</td><td style="padding:8px;border:1px solid #ddd;">${(data.urlOrigem as string) || 'cursos.rubiadecarli.com.br'}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Data/Hora</td><td style="padding:8px;border:1px solid #ddd;">${data.dataHora as string}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dispositivo</td><td style="padding:8px;border:1px solid #ddd;">${(data.dispositivo as string) || 'desktop'}</td></tr>
-        ${data.grupoWhatsapp ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Grupo WhatsApp Tricologia</td><td style="padding:8px;border:1px solid #ddd;">${mapCheckbox(data.grupoWhatsapp as string)}</td></tr>` : ''}
-        ${data.receberDicas ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dicas & novos cursos</td><td style="padding:8px;border:1px solid #ddd;">${mapCheckbox(data.receberDicas as string)}</td></tr>` : ''}
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Nome</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(data.nome)}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">E-mail</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(data.email)}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">WhatsApp</td><td style="padding:8px;border:1px solid #ddd;"><a href="https://wa.me/${String(data.whatsapp ?? '').replace(/\D/g, '')}">${escapeHtml(data.whatsapp)}</a></td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Assunto</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.procedimento as string) || 'Contato Site')}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Curso</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.curso as string) || '—')}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Mensagem</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.mensagem as string) || 'Não informado')}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Origem</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.origem as string) || (data.urlOrigem as string))}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Site/Página</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.urlOrigem as string) || 'cursos.rubiadecarli.com.br')}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Data/Hora</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(data.dataHora)}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dispositivo</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.dispositivo as string) || 'desktop')}</td></tr>
+        ${data.grupoWhatsapp ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Grupo WhatsApp Tricologia</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(mapCheckbox(data.grupoWhatsapp as string))}</td></tr>` : ''}
+        ${data.receberDicas ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dicas & novos cursos</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(mapCheckbox(data.receberDicas as string))}</td></tr>` : ''}
       </table>
       ${isEbook ? `<p style="margin-top:16px;padding:12px;background:#FDF6E3;border-left:4px solid #B8952E;color:#333;">📖 <strong>Ação:</strong> encaminhe o link do e-book para o lead e chame no WhatsApp informando que o material já foi enviado e que está disponível para tirar todas as dúvidas sobre os cursos.</p>` : ''}
     </div>
@@ -63,15 +79,17 @@ export async function sendLeadEmail(data: Record<string, unknown>) {
     return;
   }
 
-  const fromEmail = process.env.EMAIL_FROM || 'mkt@tsdigitais.com';
-  const fromName = process.env.EMAIL_FROM_NAME || 'MKT | Cursos Rúbia De Carli';
+  const fromEmail = safeHeader(process.env.EMAIL_FROM || 'mkt@tsdigitais.com', 200);
+  const fromName = safeHeader(process.env.EMAIL_FROM_NAME || 'MKT | Cursos Rúbia De Carli', 80);
   const from = `"${fromName}" <${fromEmail}>`;
   const to = [EMAILS.contato, EMAILS.dra, EMAILS.dev].join(', ');
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
+  const safeName = safeHeader(data.nome, 120);
+  const safeProcedure = safeHeader(data.procedimento || data.curso || 'Contato Site', 100);
   const subject = isEbook
-    ? `🎓 Novo Lead de E-book: ${data.nome as string}`
-    : `🚀 Lead: ${data.nome as string} - ${(data.procedimento || data.curso || 'Contato Site') as string}`;
+    ? `🎓 Novo Lead de E-book: ${safeName}`
+    : `🚀 Lead: ${safeName} - ${safeProcedure}`;
   const html = buildHtml(data);
 
   await transporter.sendMail({ from, to, subject, html });
