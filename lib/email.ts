@@ -85,9 +85,11 @@ export async function sendLeadEmail(data: Record<string, unknown>) {
   const to = [EMAILS.contato, EMAILS.dra, EMAILS.dev].join(', ');
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
+  const safeName = safeHeader(data.nome, 120);
+  const safeProcedure = safeHeader(data.procedimento || data.curso || 'Contato Site', 100);
   const subject = isEbook
-    ? `🎓 Novo Lead de E-book: ${escapeHtml(data.nome)}`
-    : `🚀 Lead: ${escapeHtml(data.nome)} - ${(data.procedimento || data.curso || 'Contato Site') as string}`;
+    ? `🎓 Novo Lead de E-book: ${safeName}`
+    : `🚀 Lead: ${safeName} - ${safeProcedure}`;
   const html = buildHtml(data);
 
   await transporter.sendMail({ from, to, subject, html });
