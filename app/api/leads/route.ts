@@ -57,8 +57,8 @@ export async function POST(req: Request) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: 'Informe um e-mail válido.' }, { status: 400 });
     }
-    if (!nome || (!isNewsletter && !whatsapp)) {
-      return NextResponse.json({ error: 'Preencha os campos obrigatórios.' }, { status: 400 });
+    if (!nome) {
+      return NextResponse.json({ error: 'Informe seu nome.' }, { status: 400 });
     }
 
     const consentNewsletter = truthy(body.newsletter) || truthy(body.receberDicas);
