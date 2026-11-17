@@ -95,7 +95,7 @@ export async function sendLeadEmail(data: Record<string, unknown>) {
   const fromEmail = safeHeader(process.env.EMAIL_FROM || 'mkt@tsdigitais.com', 200);
   const fromName = safeHeader(process.env.EMAIL_FROM_NAME || 'MKT | Cursos Rúbia De Carli', 80);
   const from = `"${fromName}" <${fromEmail}>`;
-  const to = [...new Set([EMAILS.contato, EMAILS.dra, EMAILS.dev, EMAILS.tiago].filter(Boolean))];
+  const to = Array.from(new Set([EMAILS.contato, EMAILS.dra, EMAILS.dev, EMAILS.tiago].filter(Boolean)));
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
   const safeName = safeHeader(data.nome, 120);
