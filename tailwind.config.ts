@@ -1,6 +1,4 @@
-import { withUt } from 'uploadthing/tw'
-
-export default withUt({
+export default {
   darkMode: ['class'],
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   theme: {
@@ -69,4 +67,4 @@ export default withUt({
     },
   },
   plugins: [require('tailwindcss-animate')], // eslint-disable-line @typescript-eslint/no-require-imports
-})
+}
