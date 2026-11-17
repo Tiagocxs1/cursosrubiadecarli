@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Política de Reembolso',
   description: 'Política de cancelamento e reembolso dos cursos presenciais da Dra. Rúbia De Carli.',
+  alternates: { canonical: 'https://cursos.rubiadecarli.com.br/politica-de-reembolso' },
   robots: { index: false, follow: false },
 };
 

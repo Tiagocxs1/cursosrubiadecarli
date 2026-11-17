@@ -6,6 +6,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Termos de Uso',
   description: 'Termos de Uso dos cursos presenciais da Dra. Rúbia De Carli — Tricologia e Biomedicina Estética.',
+  alternates: { canonical: 'https://cursos.rubiadecarli.com.br/termos-de-uso' },
   robots: { index: false, follow: false },
 };
 

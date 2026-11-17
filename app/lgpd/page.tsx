@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'LGPD — Proteção de Dados',
   description: 'Informações sobre o tratamento de dados pessoais conforme a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).',
+  alternates: { canonical: 'https://cursos.rubiadecarli.com.br/lgpd' },
   robots: { index: false, follow: false },
 };
 
