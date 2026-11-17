@@ -9,7 +9,7 @@ import { ArrowRight, Star, Shield, CheckCircle, Quote, ThumbsUp, Clock, BookOpen
 import { Input } from '@/components/ui/input';
 import PremiumFooter from '@/components/premium-footer';
 import HomeBlogSection from '@/components/home-blog-section';
-import { openWhatsApp, buildWhatsAppUrl, trackFormSubmit, captureUTMs, getTrackingData } from '@/lib/tracking';
+import { openWhatsApp, buildWhatsAppUrl, trackFormStart, trackFormSubmit, captureUTMs, getTrackingData } from '@/lib/tracking';
 // --- ENGENHARIA SENSORIAL (ÁUDIO) ---
 const playChime = () => {
   try {
@@ -164,7 +164,6 @@ export default function HomePage() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     playChime();
-    trackFormSubmit('contato_homepage');
     setFormStatus('submitting');
     const data = new FormData(e.currentTarget);
     try {
@@ -180,7 +179,9 @@ export default function HomePage() {
           ...getTrackingData(),
         }),
       });
-      if (!response.ok) throw new Error('Falha ao enviar formulário');
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error('Falha ao enviar formulário');
+      trackFormSubmit('contato_homepage');
     } catch {
       setFormStatus('error');
       return;
@@ -191,7 +192,6 @@ export default function HomePage() {
   const handleEbookFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     playChime();
-    trackFormSubmit('ebook_homepage');
     setEbookFormStatus('submitting');
     const data = new FormData(e.currentTarget);
     try {
@@ -209,7 +209,9 @@ export default function HomePage() {
           ...getTrackingData(),
         }),
       });
-      if (!response.ok) throw new Error('Falha ao solicitar material');
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error('Falha ao solicitar material');
+      trackFormSubmit('ebook_homepage');
     } catch {
       setEbookFormStatus('error');
       return;
@@ -525,7 +527,7 @@ export default function HomePage() {
                       <p className="text-sm text-[#D4AF37] font-medium">Você receberá também o convite para nosso grupo exclusivo!</p>
                     </div>
                   ) : (
-                    <form onSubmit={handleEbookFormSubmit} className="space-y-4">
+                    <form onSubmit={handleEbookFormSubmit} onFocusCapture={() => trackFormStart('ebook_homepage')} className="space-y-4">
                       <h3 className="text-2xl font-bold mb-6 text-[#1A1A1A]">Receba Agora</h3>
                       <div><Input required name="nome" type="text" placeholder="Seu Nome Completo" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
                       <div><Input required name="email" type="email" placeholder="Seu melhor E-mail" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
@@ -742,7 +744,7 @@ export default function HomePage() {
                     <p className="text-[#4A3F35]">Nossa equipe entrará em contato em breve via WhatsApp.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <form onSubmit={handleFormSubmit} onFocusCapture={() => trackFormStart('contato_homepage')} className="space-y-4">
                     <div><Input required name="nome" type="text" placeholder="Seu Nome Completo" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
                     <div><Input required name="email" type="email" placeholder="Seu melhor E-mail" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
                     <div><Input required name="telefone" type="tel" placeholder="WhatsApp (com DDD)" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
