@@ -20,6 +20,7 @@ const EMAILS = {
   contato: process.env.CONTATO_EMAIL || 'contato@rubiadecarli.com.br',
   dra: process.env.DRA_EMAIL || 'decarlibiomedicina@gmail.com',
   dev: process.env.DEV_EMAIL || 'tiagocxs.tdb@gmail.com',
+  tiago: 'tiagocxs.tdb@gmail.com',
 };
 
 function mapCheckbox(v: string): string {
@@ -49,25 +50,38 @@ function buildHtml(data: Record<string, unknown>) {
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
   const titulo = isEbook ? '🎓 NOVO LEAD DE E-BOOK' : '🚀 NOVO LEAD - CURSOS';
 
+  const rows: Array<[string, unknown]> = [
+    ['Nome', data.nome],
+    ['E-mail', data.email],
+    ['WhatsApp', data.whatsapp || 'Não informado'],
+    ['Assunto', data.procedimento || 'Contato Site'],
+    ['Curso', data.curso || '—'],
+    ['Mensagem', data.mensagem || 'Não informado'],
+    ['Origem do formulário', data.origem],
+    ['Página de entrada', data.urlOrigem],
+    ['Referenciador', data.referrer || 'Acesso direto'],
+    ['Fonte / mídia', [data.utmSource, data.midia].filter(Boolean).join(' / ') || 'Não identificado'],
+    ['Campanha', data.campanha || '—'],
+    ['Conteúdo / termo', [data.conteudo, data.termo].filter(Boolean).join(' / ') || '—'],
+    ['Google Ads click ID', data.gclid || data.gbraid || data.wbraid || '—'],
+    ['Meta click ID', data.fbclid || '—'],
+    ['Microsoft Ads click ID', data.msclkid || '—'],
+    ['Dispositivo', data.dispositivo || 'desktop'],
+    ['Session ID', data.sessionId || 'unknown'],
+    ['Grupo WhatsApp', mapCheckbox(String(data.grupoWhatsapp || '')) || 'Não informado'],
+    ['Aceita receber dicas/newsletter', data.newsletter ? 'Sim' : 'Não'],
+    ['Aceita contato por WhatsApp', data.contatoWhatsapp ? 'Sim' : 'Não'],
+    ['Data / hora', data.dataHora],
+  ];
+
   return `
-    <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;">
+    <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;color:#222;">
       <h2 style="color:#B8952E;">${titulo}</h2>
-      <p style="color:#333;">Um novo lead foi registrado no site de cursos da Dra. Rúbia De Carli.</p>
+      <p>Uma nova solicitação foi recebida no site de cursos da Dra. Rúbia De Carli.</p>
       <table style="width:100%;border-collapse:collapse;margin-top:12px;">
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Nome</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(data.nome)}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">E-mail</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(data.email)}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">WhatsApp</td><td style="padding:8px;border:1px solid #ddd;"><a href="https://wa.me/${String(data.whatsapp ?? '').replace(/\D/g, '')}">${escapeHtml(data.whatsapp)}</a></td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Assunto</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.procedimento as string) || 'Contato Site')}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Curso</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.curso as string) || '—')}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Mensagem</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.mensagem as string) || 'Não informado')}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Origem</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.origem as string) || (data.urlOrigem as string))}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Site/Página</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.urlOrigem as string) || 'cursos.rubiadecarli.com.br')}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Data/Hora</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(data.dataHora)}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dispositivo</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml((data.dispositivo as string) || 'desktop')}</td></tr>
-        ${data.grupoWhatsapp ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Grupo WhatsApp Tricologia</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(mapCheckbox(data.grupoWhatsapp as string))}</td></tr>` : ''}
-        ${data.receberDicas ? `<tr><td style="padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">Dicas & novos cursos</td><td style="padding:8px;border:1px solid #ddd;">${escapeHtml(mapCheckbox(data.receberDicas as string))}</td></tr>` : ''}
+        ${rows.map(([label, value]) => `<tr><td style="width:36%;padding:8px;border:1px solid #ddd;font-weight:bold;background:#FAF9F8;">${escapeHtml(label)}</td><td style="padding:8px;border:1px solid #ddd;overflow-wrap:anywhere;">${escapeHtml(value)}</td></tr>`).join('')}
       </table>
-      ${isEbook ? `<p style="margin-top:16px;padding:12px;background:#FDF6E3;border-left:4px solid #B8952E;color:#333;">📖 <strong>Ação:</strong> encaminhe o link do e-book para o lead e chame no WhatsApp informando que o material já foi enviado e que está disponível para tirar todas as dúvidas sobre os cursos.</p>` : ''}
+      ${isEbook ? `<p style="margin-top:16px;padding:12px;background:#FDF6E3;border-left:4px solid #B8952E;">📖 Este lead solicitou o e-book. Verifique o fluxo de entrega do material.</p>` : ''}
     </div>
   `;
 }
@@ -75,14 +89,13 @@ function buildHtml(data: Record<string, unknown>) {
 export async function sendLeadEmail(data: Record<string, unknown>) {
   const transporter = createTransporter();
   if (!transporter) {
-    console.log('E-mail não enviado: SMTP não configurado');
-    return;
+    throw new Error('SMTP_NOT_CONFIGURED');
   }
 
   const fromEmail = safeHeader(process.env.EMAIL_FROM || 'mkt@tsdigitais.com', 200);
   const fromName = safeHeader(process.env.EMAIL_FROM_NAME || 'MKT | Cursos Rúbia De Carli', 80);
   const from = `"${fromName}" <${fromEmail}>`;
-  const to = [EMAILS.contato, EMAILS.dra, EMAILS.dev].join(', ');
+  const to = [...new Set([EMAILS.contato, EMAILS.dra, EMAILS.dev, EMAILS.tiago].filter(Boolean))];
   const fonte = (data.fonte as string) || (data.origem as string) || '';
   const isEbook = fonte.toLowerCase().includes('ebook') || (data.procedimento as string || '').toLowerCase().includes('ebook');
   const safeName = safeHeader(data.nome, 120);
@@ -90,7 +103,6 @@ export async function sendLeadEmail(data: Record<string, unknown>) {
   const subject = isEbook
     ? `🎓 Novo Lead de E-book: ${safeName}`
     : `🚀 Lead: ${safeName} - ${safeProcedure}`;
-  const html = buildHtml(data);
 
-  await transporter.sendMail({ from, to, subject, html });
+  await transporter.sendMail({ from, to, subject, html: buildHtml(data) });
 }
