@@ -4,53 +4,32 @@ import { getPublishedPosts } from '@/lib/blog';
 const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
-
   const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: `${BASE_URL}/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${BASE_URL}/cursos/tricologia-essencial`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/cursos/protocolo-full-face`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/blog`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/obrigado`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.1,
-    },
+    { url: `${BASE_URL}/`, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${BASE_URL}/cursos/tricologia-essencial`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${BASE_URL}/cursos/protocolo-full-face`, changeFrequency: 'monthly', priority: 0.9 },
   ];
 
-  // Blog posts dinâmicos
-  let blogRoutes: MetadataRoute.Sitemap = [];
+  let posts: Awaited<ReturnType<typeof getPublishedPosts>> = [];
   try {
-    const posts = await getPublishedPosts();
-    blogRoutes = posts.map((post) => ({
-      url: `${BASE_URL}/blog/${post.slug ?? post.id}`,
-      lastModified: post.published_at ? new Date(post.published_at) : now,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    }));
+    posts = await getPublishedPosts();
   } catch {
-    // Supabase não disponível no build — retorna apenas rotas estáticas
+    // Se o Supabase estiver indisponível, mantém apenas as páginas estáticas.
+  }
+
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug ?? post.id}`,
+    ...(post.published_at ? { lastModified: new Date(post.published_at) } : {}),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  if (posts.length > 0) {
+    staticRoutes.push({
+      url: `${BASE_URL}/blog`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    });
   }
 
   return [...staticRoutes, ...blogRoutes];

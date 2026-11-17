@@ -53,7 +53,7 @@ export async function POST(req: Request) {
 
     if (supabase) {
       try {
-        const organizationId = process.env.NEXT_PUBLIC_CLERK_ORG_ID?.replace(/\\n/g, '').trim() || 'CURSOS_RUBIA';
+        const organizationId = process.env.SUPABASE_ORGANIZATION_ID?.replace(/\\n/g, '').trim() || 'CURSOS_RUBIA';
         await supabase.from('customers').insert({
           full_name: nome,
           phone: whatsapp,

@@ -12,16 +12,22 @@ interface PremiumFooterProps {
 export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [newsletterError, setNewsletterError] = useState('');
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch('/api/leads', {
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, nome: email, origem: 'site - newsletter footer', fonte: 'newsletter_footer', ...getTrackingData() }),
       });
-    } catch { /* fail silently */ }
+      if (!response.ok) throw new Error('Falha ao inscrever e-mail');
+      setNewsletterError('');
+    } catch {
+      setNewsletterError('Não foi possível concluir sua inscrição. Tente novamente.');
+      return;
+    }
     setSubscribed(true);
     setEmail('');
   };
@@ -55,7 +61,7 @@ export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
             </div>
             <div className="flex items-center gap-2">
               <Mail className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
-              <span>contato@rubiaadecarli.com.br</span>
+              <span>contato@rubiadecarli.com.br</span>
             </div>
             <div className="flex items-start gap-2">
               <MapPin className="w-3.5 h-3.5 text-[#D4AF37] shrink-0 mt-0.5" />
@@ -73,7 +79,7 @@ export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
           <h4 className="text-sm font-semibold text-[#D4AF37] uppercase tracking-widest">Cursos</h4>
           <ul className="space-y-2">
             {[
-              { label: "Tricologia Essencial",  href: "/cursos/tricologia" },
+              { label: "Tricologia Essencial",  href: "/cursos/tricologia-essencial" },
               { label: "Protocolo Full Face",   href: "/cursos/protocolo-full-face" },
             ].map((l) => (
               <li key={l.label}>
@@ -91,7 +97,6 @@ export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
               { label: "Sobre a Dra. Rúbia",  href: "/#sobre" },
               { label: "Depoimentos",          href: "/#depoimentos" },
               { label: "Contato",              href: "/#contato" },
-              { label: "Acessar Plataforma",   href: "/sign-in" },
             ].map((l) => (
               <li key={l.label}>
                 <Link href={l.href} className="text-sm text-gray-300 hover:text-[#D4AF37] transition-colors flex items-center gap-2">
@@ -145,6 +150,7 @@ export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
                 >
                   Inscrever
                 </button>
+                {newsletterError && <p className="text-sm text-red-300" role="alert">{newsletterError}</p>}
               </form>
             )}
           </div>

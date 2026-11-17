@@ -63,7 +63,7 @@ export default function LeadCaptureForm({
     setStatus('submitting');
     
     try {
-      await fetch('/api/leads', {
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -77,6 +77,7 @@ export default function LeadCaptureForm({
           ...getTrackingData(),
         }),
       });
+      if (!response.ok) throw new Error('Não foi possível enviar a solicitação.');
 
       setStatus('success');
       if (onSuccess) onSuccess();

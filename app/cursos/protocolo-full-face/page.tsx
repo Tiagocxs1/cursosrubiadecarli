@@ -1,1 +1,1 @@
-export { default } from './CoursePageWrapper';
+export { default, generateMetadata } from './CoursePageWrapper';

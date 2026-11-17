@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
-import { ClerkProvider } from '@clerk/nextjs'
 import { ToastProvider } from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers'
 import TrackingScript from '@/components/tracking-script'
@@ -20,7 +18,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Dra. Rúbia De Carli — Cursos Presenciais em Tricologia e Biomedicina Estética',
+    default: 'Cursos Presenciais em Tricologia e Biomedicina Estética | Dra. Rúbia De Carli',
     template: '%s | Dra. Rúbia De Carli',
   },
   description:
@@ -49,9 +47,9 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: BASE_URL,
     siteName: 'Cursos Dra. Rúbia De Carli',
-    title: 'Dra. Rúbia De Carli — Cursos Presenciais em Tricologia e Biomedicina Estética',
+    title: 'Cursos Presenciais em Tricologia e Biomedicina Estética | Dra. Rúbia De Carli',
     description:
-      'Formação presencial com certificação em Tricologia e Biomedicina Estética. Caxias do Sul, RS. +500 alunos formados.',
+      'Cursos presenciais de Tricologia e Biomedicina Estética em Caxias do Sul, RS. Conheça os programas e consulte as próximas turmas.',
     images: [
       {
         url: 'https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/drarubiadecarli.jpg',
@@ -71,25 +69,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider dynamic afterSignOutUrl="/">
-      <html lang="pt-BR">
+    <html lang="pt-BR">
         <head>
           <TrackingScript />
           <JsonLd schema={[buildOrganizationSchema(), buildPersonSchema()]} />
-          {/* Microsoft Clarity - Script de heatmaps e gravação de sessões */}
-          <Script
-            id="microsoft-clarity"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "w66ija79qj");
-              `,
-            }}
-          />
         </head>
         <body className={inter.className}>
           <ConfettiProvider />
@@ -102,6 +85,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </body>
       </html>
-    </ClerkProvider>
   )
 }

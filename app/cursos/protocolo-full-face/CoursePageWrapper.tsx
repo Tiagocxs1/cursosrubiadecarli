@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import JsonLd from '@/components/json-ld';
-import { buildCourseSchema, buildFaqSchema, buildBreadcrumbSchema, buildOrganizationSchema, buildPersonSchema } from '@/lib/schema';
+import { buildCourseSchema, buildFaqSchema, buildBreadcrumbSchema } from '@/lib/schema';
 import EnhancedCoursePageTemplate from '@/components/EnhancedCoursePageTemplate';
 import { protocoloFullFaceEnhancedData } from './enhancedCourseData';
 
@@ -44,8 +44,8 @@ const faq = [
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Protocolo Full Face — Curso Presencial de Harmonização Facial em Caxias do Sul | Dra. Rúbia De Carli',
-    description: 'Curso presencial de Harmonização Facial (Protocolo Full Face) em Caxias do Sul, RS. 3 dias imersivos, 12 horas, prática em pacientes reais. Toxina, Preenchedores, Bioestimuladores, Fullips. Dra. Rúbia De Carli (CRBM 2144). Garanta sua vaga.',
+    title: 'Curso Full Face Presencial em Caxias do Sul',
+    description: 'Imersão presencial de 3 dias em harmonização facial, com prática supervisionada em Caxias do Sul. Conheça os módulos, o investimento e as próximas turmas.'
     keywords: ['protocolo full face', 'harmonização facial Caxias do Sul', 'curso harmonização facial presencial', 'Dra. Rúbia De Carli', 'bioestimuladores colágeno', 'toxina botulínica curso', 'preenchedores ácido hialurônico'],
     authors: [{ name: 'Dra. Rúbia De Carli', url: BASE_URL }],
     alternates: { canonical: `${BASE_URL}${COURSE_URL}` },
@@ -54,8 +54,8 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: 'pt_BR',
       url: `${BASE_URL}${COURSE_URL}`,
       siteName: 'Cursos Dra. Rúbia De Carli',
-      title: 'Protocolo Full Face — Curso Presencial de Harmonização Facial em Caxias do Sul',
-      description: 'Curso presencial de Harmonização Facial em Caxias do Sul, RS. 3 dias imersivos, prática em pacientes reais. Dra. Rúbia De Carli (CRBM 2144). Garanta sua vaga.',
+      title: 'Curso Full Face Presencial em Caxias do Sul | Dra. Rúbia De Carli',
+      description: 'Imersão presencial de 3 dias em harmonização facial, com prática supervisionada em Caxias do Sul, RS.'
       images: [{
         url: 'https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/protocolo_fullface_capa2.png',
         width: 1200,
@@ -65,8 +65,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Protocolo Full Face — Curso Presencial de Harmonização Facial',
-      description: 'Curso presencial de Harmonização Facial em Caxias do Sul, RS. 3 dias imersivos, prática em pacientes reais. Dra. Rúbia De Carli.',
+      title: 'Curso Full Face Presencial em Caxias do Sul',
+      description: 'Imersão presencial de 3 dias em harmonização facial em Caxias do Sul, RS.'
       images: ['https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/protocolo_fullface_capa2.png'],
     },
     robots: { index: true, follow: true },
@@ -86,18 +86,28 @@ const courseSchema = buildCourseSchema({
 const faqSchema = buildFaqSchema(faq);
 const breadcrumbSchema = buildBreadcrumbSchema([
   { name: 'Início', url: BASE_URL },
-  { name: 'Cursos', url: `${BASE_URL}/cursos` },
+  { name: 'Cursos', url: `${BASE_URL}/#cursos` },
   { name: 'Protocolo Full Face', url: `${BASE_URL}${COURSE_URL}` },
 ]);
 
 export default function ProtocoloFullFaceCoursePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([buildOrganizationSchema(), buildPersonSchema(), courseSchema, faqSchema, breadcrumbSchema]) }}
-      />
+      <JsonLd schema={[courseSchema, faqSchema, breadcrumbSchema]} />
       <EnhancedCoursePageTemplate {...protocoloFullFaceEnhancedData} />
+      <section id="faq" className="bg-[#FAF9F8] px-6 py-16">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-8 text-3xl font-semibold text-[#1A1A1A]">Perguntas frequentes</h2>
+          <div className="space-y-3">
+            {faq.map((item) => (
+              <details key={item.question} className="rounded-xl border border-[#D4AF37]/20 bg-white p-5">
+                <summary className="cursor-pointer font-semibold text-[#1A1A1A]">{item.question}</summary>
+                <p className="mt-3 leading-relaxed text-[#4A3F35]">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

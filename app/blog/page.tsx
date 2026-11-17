@@ -1,10 +1,21 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { getPublishedPosts, formatDate, readingTime, postUrl } from '@/lib/blog';
 import type { BlogPost } from '@/lib/blog';
 
 export const revalidate = 300;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const posts = await getPublishedPosts(1);
+  return {
+    title: 'Artigos sobre Tricologia e Biomedicina Estética | Dra. Rúbia De Carli',
+    description: 'Conteúdo especializado em Tricologia e Biomedicina Estética por Dra. Rúbia De Carli.',
+    alternates: { canonical: 'https://cursos.rubiadecarli.com.br/blog' },
+    robots: { index: posts.length > 0, follow: true },
+  };
+}
 
 function BlogCard({ post }: { post: BlogPost }) {
   const slug = postUrl(post);

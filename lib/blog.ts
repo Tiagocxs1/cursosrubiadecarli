@@ -1,7 +1,7 @@
 /**
  * Blog — funções de acesso à tabela `contents` no Supabase.
  *
- * Filtra sempre por org_id (NEXT_PUBLIC_CLERK_ORG_ID) e status = 'published'.
+ * Filtra sempre por org_id (SUPABASE_ORGANIZATION_ID) e status = 'published'.
  * Usa supabaseAdmin (service role) para ignorar RLS e garantir leitura segura
  * em Server Components e API routes.
  *
@@ -81,7 +81,7 @@ function mapRow(row: ContentRow): BlogPost {
 // Helpers
 // ---------------------------------------------------------------------------
 
-const ORG_ID = process.env.NEXT_PUBLIC_CLERK_ORG_ID?.replace(/\\n/g, '').trim() ?? '';
+const ORG_ID = process.env.SUPABASE_ORGANIZATION_ID?.replace(/\\n/g, '').trim() ?? '';
 
 export { postUrl, formatDate, readingTime } from './blog-utils';
 

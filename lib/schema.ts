@@ -94,10 +94,10 @@ export interface CourseSchemaInput {
 }
 
 export function buildCourseSchema(input: CourseSchemaInput) {
-  const priceValue = input.price
-    .replace('R$ ', '')
-    .replace('.', '')
-    .replace(',', '.');
+  const rawPrice = input.price.replace(/[^0-9,.-]/g, '');
+  const priceValue = rawPrice.includes(',')
+    ? rawPrice.replace(/[.]/g, '').replace(',', '.')
+    : rawPrice;
 
   return {
     '@context': 'https://schema.org',
@@ -136,12 +136,6 @@ export function buildCourseSchema(input: CourseSchemaInput) {
       '@type': 'Person',
       name: 'Dra. Rúbia De Carli',
       url: BASE_URL,
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '50',
-      bestRating: '5',
     },
   };
 }

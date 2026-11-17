@@ -168,7 +168,7 @@ export default function HomePage() {
     setFormStatus('submitting');
     const data = new FormData(e.currentTarget);
     try {
-      await fetch('/api/leads', {
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -180,7 +180,11 @@ export default function HomePage() {
           ...getTrackingData(),
         }),
       });
-    } catch { /* fail silently */ }
+      if (!response.ok) throw new Error('Falha ao enviar formulário');
+    } catch {
+      setFormStatus('error');
+      return;
+    }
     router.push('/obrigado?tipo=contato');
   };
 
@@ -191,7 +195,7 @@ export default function HomePage() {
     setEbookFormStatus('submitting');
     const data = new FormData(e.currentTarget);
     try {
-      await fetch('/api/leads', {
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -205,7 +209,11 @@ export default function HomePage() {
           ...getTrackingData(),
         }),
       });
-    } catch { /* fail silently */ }
+      if (!response.ok) throw new Error('Falha ao solicitar material');
+    } catch {
+      setEbookFormStatus('error');
+      return;
+    }
     router.push('/obrigado?tipo=ebook');
   };
 
@@ -537,6 +545,7 @@ export default function HomePage() {
                       <button type="submit" disabled={ebookFormStatus === 'submitting'} className="w-full py-4 mt-6 bg-[#D4AF37] hover:bg-[#B8952E] text-white rounded-xl font-semibold tracking-wide transition-all flex justify-center items-center gap-2 disabled:opacity-70">
                         {ebookFormStatus === 'submitting' ? 'Enviando...' : 'BAIXAR EBOOK GRATIS'}
                       </button>
+                      {ebookFormStatus === 'error' && <p className="mt-3 text-sm text-red-600" role="alert">Não foi possível enviar sua solicitação. Tente novamente.</p>}
                       <p className="text-center text-xs text-gray-400 mt-4 flex items-center justify-center gap-1">
                         <Shield className="w-3 h-3" /> Seus dados estão 100% seguros
                       </p>
@@ -740,6 +749,7 @@ export default function HomePage() {
                     <button type="submit" disabled={formStatus === 'submitting'} className="w-full py-4 mt-2 bg-[#1A1A1A] hover:bg-[#2A2A2A] text-white rounded-xl font-semibold tracking-wide transition-all flex justify-center items-center disabled:opacity-70">
                       {formStatus === 'submitting' ? 'Enviando...' : 'Falar com a Equipe'}
                     </button>
+                    {formStatus === 'error' && <p className="mt-3 text-sm text-red-600" role="alert">Não foi possível enviar sua solicitação. Tente novamente.</p>}
                   </form>
                 )}
               </div>
