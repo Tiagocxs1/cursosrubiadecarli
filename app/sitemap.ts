@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next';
 import { getPublishedPosts } from '@/lib/blog';
 
+export const revalidate = 3600;
+
 const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
