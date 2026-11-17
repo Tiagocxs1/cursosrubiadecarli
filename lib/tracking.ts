@@ -72,11 +72,16 @@ declare global {
 export function track(event: TrackEvent): void {
   if (typeof window === 'undefined') return;
 
-  const parameters = {
+  const parameters: Record<string, string | number | undefined> = {
     event_category: event.category,
     event_label: event.label,
     value: event.value,
   };
+
+  if (event.action === 'generate_lead' && event.label) {
+    parameters.lead_source = event.label;
+    parameters.form_name = event.label;
+  }
 
   if (GTM_ID) {
     window.dataLayer = window.dataLayer || [];
@@ -114,12 +119,13 @@ export function trackFormStart(formName: string): void {
 
 /** Dispara o evento recomendado de conversão do GA4 após o servidor confirmar o lead. */
 export function trackFormSubmit(formName: string): void {
-  track({ action: 'form_submit', category: 'form', label: formName });
+  // Dispara uma única conversão após o servidor aceitar o lead.
   track({ action: 'generate_lead', category: 'form', label: formName });
 }
 
 export function trackNewsletterSignup(): void {
-  track({ action: 'sign_up', category: 'newsletter', label: 'footer_email' });
+  // A inscrição em newsletter também é aquisição de lead no GA4.
+  track({ action: 'generate_lead', category: 'newsletter', label: 'newsletter_footer' });
 }
 
 /**
