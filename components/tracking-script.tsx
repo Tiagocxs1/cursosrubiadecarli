@@ -24,7 +24,7 @@ const consentModeDefault = [
   "  ad_personalization: 'denied',",
   '  wait_for_update: 500',
   '});',
-].join('\\n');
+].join('\n');
 
 const gtmBootstrap = [
   '(function(w,d,s,l,i){',
@@ -34,15 +34,15 @@ const gtmBootstrap = [
   '  j.async=true;',
   "  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;",
   '  f.parentNode.insertBefore(j,f);',
-  "})(window,document,'script','dataLayer','" + GTM_ID + "');
-].join('\\n');
+  "})(window,document,'script','dataLayer','" + GTM_ID + "');",
+].join('\n');
 
 const ga4Bootstrap = [
   'window.dataLayer = window.dataLayer || [];',
   'window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };',
   "window.gtag('js', new Date());",
-  "window.gtag('config', '" + GA_MEASUREMENT_ID + "', { send_page_view: true, anonymize_ip: true });
-].join('\\n');
+  "window.gtag('config', '" + GA_MEASUREMENT_ID + "', { send_page_view: true, anonymize_ip: true });",
+].join('\n');
 
 const clarityConsentLoader = [
   '(function(w,d){',
@@ -59,7 +59,7 @@ const clarityConsentLoader = [
   '  };',
   '  w.__rubiaLoadClarity();',
   '})(window,document);',
-].join('\\n');
+].join('\n');
 
 function RouteTracker() {
   const pathname = usePathname();
@@ -91,6 +91,7 @@ function RouteTracker() {
 export default function TrackingScript() {
   const hasGtm = Boolean(GTM_ID);
   const hasGa4 = Boolean(GA_MEASUREMENT_ID);
+
   if (!hasGtm && !hasGa4) return null;
 
   return (
