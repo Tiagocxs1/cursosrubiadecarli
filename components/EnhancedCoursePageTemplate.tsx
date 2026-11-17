@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { captureUTMs, getTrackingData } from '@/lib/tracking';
+import { captureUTMs, getTrackingData, trackFormStart, trackFormSubmit } from '@/lib/tracking';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Star, Shield, CheckCircle, Play, X, Quote, Award, ThumbsUp, Clock } from 'lucide-react';
@@ -213,7 +213,7 @@ export default function EnhancedCoursePageTemplate({
     setFormStatus('submitting');
     const data = new FormData(e.currentTarget);
     try {
-      await fetch('/api/leads', {
+      const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -226,8 +226,13 @@ export default function EnhancedCoursePageTemplate({
           ...getTrackingData(),
         }),
       });
-    } catch { /* fail silently */ }
-    setFormStatus('success');
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error('Falha ao enviar formulário');
+      trackFormSubmit('contato_curso');
+      setFormStatus('success');
+    } catch {
+      setFormStatus('error');
+    }
   };
 
   const scrollTo = (id: string) => {
@@ -619,13 +624,18 @@ export default function EnhancedCoursePageTemplate({
                     <p className="text-[#4A3F35]">Nossa equipe entrará em contato em breve via WhatsApp.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <form onSubmit={handleFormSubmit} onFocusCapture={() => trackFormStart('contato_curso')} className="space-y-4">
                     <div><input required name="nome" type="text" placeholder="Seu Nome Completo" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
                     <div><input required name="email" type="email" placeholder="Seu melhor E-mail" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
                     <div><input required name="telefone" type="tel" placeholder="WhatsApp (com DDD)" className="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" /></div>
                     <button type="submit" disabled={formStatus === 'submitting'} className="w-full py-4 mt-2 bg-[#1A1A1A] hover:bg-[#2A2A2A] text-white rounded-xl font-semibold tracking-wide transition-all flex justify-center items-center disabled:opacity-70">
                       {formStatus === 'submitting' ? 'Enviando...' : 'Falar com a Equipe'}
                     </button>
+                    {formStatus === 'error' && (
+                      <p className="mt-3 text-sm text-red-600" role="alert">
+                        Não foi possível enviar sua solicitação. Confira os dados e tente novamente.
+                      </p>
+                    )}
                   </form>
                 )}
               </div>
