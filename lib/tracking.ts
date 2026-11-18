@@ -59,6 +59,7 @@ declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
+    __rubiaAnalyticsConsent?: boolean;
   }
 }
 
@@ -71,6 +72,16 @@ declare global {
  */
 export function track(event: TrackEvent): void {
   if (typeof window === 'undefined') return;
+
+  let hasAnalyticsConsent = window.__rubiaAnalyticsConsent === true;
+  if (!hasAnalyticsConsent) {
+    try {
+      hasAnalyticsConsent = localStorage.getItem('rubia_cookie_consent') === 'accepted';
+    } catch {
+      hasAnalyticsConsent = false;
+    }
+  }
+  if (!hasAnalyticsConsent) return;
 
   const parameters: Record<string, string | number | undefined> = {
     event_category: event.category,
