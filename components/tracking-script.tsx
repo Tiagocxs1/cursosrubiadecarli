@@ -26,17 +26,6 @@ const consentModeDefault = [
   '});',
 ].join('\n');
 
-const gtmBootstrap = [
-  '(function(w,d,s,l,i){',
-  '  w[l]=w[l]||[];',
-  "  w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
-  "  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';",
-  '  j.async=true;',
-  "  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;",
-  '  f.parentNode.insertBefore(j,f);',
-  '})(window,document,"script","dataLayer","' + GTM_ID + '");',
-].join('\n');
-
 const ga4Bootstrap = [
   'window.dataLayer = window.dataLayer || [];',
   'window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };',
@@ -96,16 +85,11 @@ export default function TrackingScript() {
 
   return (
     <>
-      <Script id="consent-mode-default" strategy="beforeInteractive">
-        {consentModeDefault}
-      </Script>
-      {hasGtm && (
-        <Script id="gtm-init" strategy="afterInteractive">
-          {gtmBootstrap}
-        </Script>
-      )}
       {!hasGtm && hasGa4 && (
         <>
+          <Script id="consent-mode-default" strategy="beforeInteractive">
+            {consentModeDefault}
+          </Script>
           <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID} strategy="afterInteractive" />
           <Script id="ga4-init" strategy="afterInteractive">
             {ga4Bootstrap}
