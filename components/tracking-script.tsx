@@ -9,10 +9,35 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    __rubiaLoadAnalytics?: () => void;
+    __rubiaAnalyticsLoaded?: boolean;
+    __rubiaAnalyticsConsent?: boolean;
     __rubiaLoadClarity?: () => void;
     __rubiaClarityLoaded?: boolean;
   }
 }
+
+const analyticsLoader = GTM_ID
+  ? [
+      '  (function(w,d,s,l,i){',
+      '    w[l]=w[l]||[];',
+      "    w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+      "    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';",
+      '    j.async=true;',
+      "    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;",
+      '    if (f && f.parentNode) f.parentNode.insertBefore(j,f); else d.head.appendChild(j);',
+      "  })(window,document,'script','dataLayer','" + GTM_ID + "');",
+    ]
+  : GA_MEASUREMENT_ID
+    ? [
+        "  var gaScript=d.createElement('script');",
+        '  gaScript.async=true;',
+        "  gaScript.src='https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID + "';",
+        '  d.head.appendChild(gaScript);',
+        "  w.gtag('js',new Date());",
+        "  w.gtag('config','" + GA_MEASUREMENT_ID + "',{send_page_view:true,anonymize_ip:true});",
+      ]
+    : [];
 
 const consentModeDefault = [
   'window.dataLayer = window.dataLayer || [];',
@@ -24,24 +49,21 @@ const consentModeDefault = [
   "  ad_personalization: 'denied',",
   '  wait_for_update: 500',
   '});',
+  'window.__rubiaLoadAnalytics = function(){',
+  '  if (window.__rubiaAnalyticsLoaded) return;',
+  '  window.__rubiaAnalyticsLoaded = true;',
+  ...analyticsLoader,
+  '};',
 ].join('\n');
 
-const gtmBootstrap = [
-  '(function(w,d,s,l,i){',
-  '  w[l]=w[l]||[];',
-  "  w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
-  "  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';",
-  '  j.async=true;',
-  "  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;",
-  '  f.parentNode.insertBefore(j,f);',
-  '})(window,document,"script","dataLayer","' + GTM_ID + '");',
-].join('\n');
-
-const ga4Bootstrap = [
-  'window.dataLayer = window.dataLayer || [];',
-  'window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };',
-  "window.gtag('js', new Date());",
-  "window.gtag('config', '" + GA_MEASUREMENT_ID + "', { send_page_view: true, anonymize_ip: true });",
+const consentRestore = [
+  'try {',
+  "  if (localStorage.getItem('rubia_cookie_consent') === 'accepted') {",
+  '    window.__rubiaAnalyticsConsent = true;',
+  "    window.gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' });",
+  '    window.__rubiaLoadAnalytics?.();',
+  '  }',
+  '} catch (e) {}',
 ].join('\n');
 
 const clarityConsentLoader = [
@@ -80,7 +102,7 @@ function RouteTracker() {
       page_title: document.title,
     };
 
-    if (window.gtag && (GTM_ID || GA_MEASUREMENT_ID)) {
+    if (window.__rubiaAnalyticsLoaded && window.gtag && (GTM_ID || GA_MEASUREMENT_ID)) {
       window.gtag('event', 'page_view', pageData);
     }
   }, [pathname, searchParams]);
@@ -99,18 +121,10 @@ export default function TrackingScript() {
       <Script id="consent-mode-default" strategy="beforeInteractive">
         {consentModeDefault}
       </Script>
-      {hasGtm && (
-        <Script id="gtm-init" strategy="afterInteractive">
-          {gtmBootstrap}
+      {(hasGtm || hasGa4) && (
+        <Script id="analytics-consent-restore" strategy="afterInteractive">
+          {consentRestore}
         </Script>
-      )}
-      {!hasGtm && hasGa4 && (
-        <>
-          <Script src={'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID} strategy="afterInteractive" />
-          <Script id="ga4-init" strategy="afterInteractive">
-            {ga4Bootstrap}
-          </Script>
-        </>
       )}
       <Script id="clarity-consent-loader" strategy="afterInteractive">
         {clarityConsentLoader}
