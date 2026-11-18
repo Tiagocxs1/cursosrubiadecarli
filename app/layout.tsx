@@ -4,6 +4,7 @@ import './globals.css'
 import { ToastProvider } from '@/components/providers/toaster-provider'
 import { ConfettiProvider } from '@/components/providers'
 import TrackingScript from '@/components/tracking-script'
+import GtmBootstrap from '@/components/gtm-bootstrap'
 import CookieBanner from '@/components/cookie-banner'
 import JsonLd from '@/components/json-ld'
 import { buildOrganizationSchema, buildPersonSchema } from '@/lib/schema'
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
         <head>
+          <GtmBootstrap />
           <TrackingScript />
           <JsonLd schema={[buildOrganizationSchema(), buildPersonSchema()]} />
         </head>
