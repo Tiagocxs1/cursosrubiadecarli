@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { getTrackingData } from '@/lib/tracking';
+import { getTrackingData, trackFormStart, trackNewsletterSignup } from '@/lib/tracking';
 import Link from 'next/link';
 import { Instagram, Facebook, MapPin, Phone, Mail, Clock, Shield, BadgeCheck } from 'lucide-react';
 
@@ -12,6 +12,7 @@ interface PremiumFooterProps {
 export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [newsletterConsent, setNewsletterConsent] = useState(false);
   const [newsletterError, setNewsletterError] = useState('');
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
@@ -20,16 +21,27 @@ export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, nome: email, origem: 'site - newsletter footer', fonte: 'newsletter_footer', ...getTrackingData() }),
+        body: JSON.stringify({
+          email,
+          nome: email,
+          newsletter: true,
+          receberDicas: 'sim',
+          origem: 'site - newsletter footer',
+          fonte: 'newsletter_footer',
+          ...getTrackingData(),
+        }),
       });
-      if (!response.ok) throw new Error('Falha ao inscrever e-mail');
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error('Falha ao inscrever e-mail');
       setNewsletterError('');
+      trackNewsletterSignup();
     } catch {
       setNewsletterError('Não foi possível concluir sua inscrição. Tente novamente.');
       return;
     }
     setSubscribed(true);
     setEmail('');
+    setNewsletterConsent(false);
   };
 
   return (
@@ -135,7 +147,7 @@ export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
             {subscribed ? (
               <p className="text-sm text-gray-300">Inscrito! ✓</p>
             ) : (
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-2">
+              <form onSubmit={handleNewsletterSubmit} onFocusCapture={() => trackFormStart('newsletter_footer')} className="flex flex-col gap-2">
                 <input
                   type="email"
                   required
@@ -144,9 +156,26 @@ export default function PremiumFooter({ className = "" }: PremiumFooterProps) {
                   placeholder="Seu e-mail"
                   className="w-full px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-[#D4AF37] transition-colors"
                 />
+                <label className="flex items-start gap-2 text-xs leading-relaxed text-gray-400">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={newsletterConsent}
+                    onChange={(event) => setNewsletterConsent(event.target.checked)}
+                    className="mt-0.5"
+                  />
+                  <span>
+                    Aceito receber novidades e informações sobre os cursos por e-mail. Posso cancelar
+                    a inscrição quando quiser. Consulte a{' '}
+                    <Link href="/politica-de-privacidade" className="underline hover:text-[#D4AF37]">
+                      Política de Privacidade
+                    </Link>.
+                  </span>
+                </label>
                 <button
                   type="submit"
-                  className="w-full py-2 bg-[#D4AF37] hover:bg-[#B8952E] text-white text-sm font-semibold rounded-lg transition-colors"
+                  disabled={!newsletterConsent}
+                  className="w-full rounded-lg bg-[#D4AF37] py-2 text-sm font-semibold text-white transition-colors hover:bg-[#B8952E] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   Inscrever
                 </button>

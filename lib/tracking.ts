@@ -20,8 +20,8 @@
 export const WHATSAPP_NUMBER = '5554992350352';
 
 /** Measurement ID do Google Analytics 4 (GA4). */
-export const GA_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '';
+export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? '';
 
 // ---------------------------------------------------------------------------
 // Tipos
@@ -72,23 +72,25 @@ declare global {
 export function track(event: TrackEvent): void {
   if (typeof window === 'undefined') return;
 
-  // GTM dataLayer — preferencial (funciona com ou sem consentimento, o GTM decide)
-  if (window.dataLayer) {
-    window.dataLayer.push({
-      event: event.action,
-      event_category: event.category,
-      event_label: event.label,
-      value: event.value,
-    });
+  const parameters: Record<string, string | number | undefined> = {
+    event_category: event.category,
+    event_label: event.label,
+    value: event.value,
+  };
+
+  if (event.action === 'generate_lead' && event.label) {
+    parameters.lead_source = event.label;
+    parameters.form_name = event.label;
   }
 
-  // gtag direto — fallback quando GTM não está configurado
+  if (GTM_ID) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: event.action, ...parameters });
+    return;
+  }
+
   if (window.gtag && GA_MEASUREMENT_ID) {
-    window.gtag('event', event.action, {
-      event_category: event.category,
-      event_label: event.label,
-      value: event.value,
-    });
+    window.gtag('event', event.action, parameters);
   }
 }
 
@@ -103,16 +105,34 @@ export function trackWhatsApp(label: string): void {
 /**
  * Rastreia envios de formulário.
  */
+export function trackFormStart(formName: string): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const key = 'rubia_form_start_' + formName + '_' + window.location.pathname;
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, '1');
+  } catch {
+    // Tracking must never block a form interaction.
+  }
+  track({ action: 'form_start', category: 'form', label: formName });
+}
+
+/** Dispara o evento recomendado de conversão do GA4 após o servidor confirmar o lead. */
 export function trackFormSubmit(formName: string): void {
-  track({ action: 'form_submit', category: 'form', label: formName });
+  // Dispara uma única conversão após o servidor aceitar o lead.
+  track({ action: 'generate_lead', category: 'form', label: formName });
+}
+
+export function trackNewsletterSignup(): void {
+  // A inscrição em newsletter também é aquisição de lead no GA4.
+  track({ action: 'generate_lead', category: 'newsletter', label: 'newsletter_footer' });
 }
 
 /**
  * Rastreia pageviews manualmente (útil em SPAs / rotas dinâmicas).
  */
 export function trackPageView(url: string): void {
-  if (typeof window === 'undefined' || !window.gtag || !GA_MEASUREMENT_ID) return;
-  window.gtag('config', GA_MEASUREMENT_ID, { page_path: url });
+  track({ action: 'page_view', category: 'navigation', label: url });
 }
 
 // ---------------------------------------------------------------------------
@@ -180,7 +200,7 @@ export function openWhatsApp(key: WhatsAppKey = 'geral'): void {
  * Use ao criar links para postar em Instagram, e-mail, Google Ads, etc.
  *
  * @example
- * buildUtmUrl('https://seusite.com/cursos/tricologia', {
+ * buildUtmUrl('https://seusite.com/cursos/tricologia-essencial', {
  *   utm_source: 'instagram',
  *   utm_medium: 'social',
  *   utm_campaign: 'lancamento_tricologia',
@@ -211,35 +231,35 @@ export function buildUtmUrl(baseUrl: string, params: UtmParams): string {
  * // Cole CAMPAIGN_LINKS.instagram_bio na bio do Instagram
  */
 export const CAMPAIGN_LINKS = {
-  instagram_bio: buildUtmUrl('https://drarubiadecarli.com.br', {
+  instagram_bio: buildUtmUrl('https://cursos.rubiadecarli.com.br', {
     utm_source: 'instagram',
     utm_medium: 'social',
     utm_campaign: 'bio_link',
   }),
-  instagram_stories_tricologia: buildUtmUrl('https://drarubiadecarli.com.br/cursos/tricologia', {
+  instagram_stories_tricologia: buildUtmUrl('https://cursos.rubiadecarli.com.br/cursos/tricologia-essencial', {
     utm_source: 'instagram',
     utm_medium: 'stories',
     utm_campaign: 'tricologia',
     utm_content: 'stories_swipe_up',
   }),
-  instagram_stories_full_face: buildUtmUrl('https://drarubiadecarli.com.br/cursos/protocolo-full-face', {
+  instagram_stories_full_face: buildUtmUrl('https://cursos.rubiadecarli.com.br/cursos/protocolo-full-face', {
     utm_source: 'instagram',
     utm_medium: 'stories',
     utm_campaign: 'full_face',
     utm_content: 'stories_swipe_up',
   }),
-  email_newsletter: buildUtmUrl('https://drarubiadecarli.com.br', {
+  email_newsletter: buildUtmUrl('https://cursos.rubiadecarli.com.br', {
     utm_source: 'email',
     utm_medium: 'newsletter',
     utm_campaign: 'newsletter_semanal',
   }),
-  google_ads_tricologia: buildUtmUrl('https://drarubiadecarli.com.br/cursos/tricologia', {
+  google_ads_tricologia: buildUtmUrl('https://cursos.rubiadecarli.com.br/cursos/tricologia-essencial', {
     utm_source: 'google',
     utm_medium: 'cpc',
     utm_campaign: 'tricologia_search',
     utm_content: 'ad_principal',
   }),
-  whatsapp_compartilhamento: buildUtmUrl('https://drarubiadecarli.com.br', {
+  whatsapp_compartilhamento: buildUtmUrl('https://cursos.rubiadecarli.com.br', {
     utm_source: 'whatsapp',
     utm_medium: 'referral',
     utm_campaign: 'indicacao',
@@ -251,7 +271,10 @@ export const CAMPAIGN_LINKS = {
 // ---------------------------------------------------------------------------
 
 const TRACKING_STORAGE_KEY = 'rubia_tracking_session';
-const TRACKING_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'] as const;
+const TRACKING_PARAMS = [
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+  'gclid', 'gbraid', 'wbraid', 'dclid', 'fbclid', 'msclkid',
+] as const;
 
 /**
  * Chame no useEffect das páginas para capturar UTMs da URL e salvar no localStorage.
@@ -278,13 +301,19 @@ export interface TrackingPayload {
   dataHora: string;
   dataISO: string;
   dispositivo: string;
+  utmSource: string;
   midia: string;
   campanha: string;
   conteudo: string;
   termo: string;
   gclid: string;
+  gbraid: string;
+  wbraid: string;
+  dclid: string;
   fbclid: string;
+  msclkid: string;
   urlOrigem: string;
+  referrer: string;
   sessionId: string;
   timestamp: number;
   userAgent: string;
@@ -295,6 +324,24 @@ export interface TrackingPayload {
  * Segue o mesmo formato do domínio principal (camelCase, conforme N8N_FIELD_MAPPING).
  * Lê do localStorage (capturado na entrada) + URL atual como fallback.
  */
+function getOrCreateSessionId(): string {
+  if (typeof window === 'undefined') return 'server';
+  try {
+    const existing = sessionStorage.getItem('rubia_session_id');
+    if (existing) return existing;
+    const generated = typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID()
+      : 'rubia-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+    sessionStorage.setItem('rubia_session_id', generated);
+    return generated;
+  } catch {
+    return 'session-unavailable';
+  }
+}
+
+/**
+ * Retorna origem, campanha e identificadores de clique preservados desde a entrada.
+ */
 export function getTrackingData(): TrackingPayload {
   let stored: Record<string, string> = {};
 
@@ -302,9 +349,10 @@ export function getTrackingData(): TrackingPayload {
     try {
       const raw = localStorage.getItem(TRACKING_STORAGE_KEY);
       if (raw) stored = JSON.parse(raw);
-    } catch { /* ignore */ }
+    } catch {
+      stored = {};
+    }
 
-    // Fallback: lê da URL atual caso captureUTMs não tenha sido chamado
     const params = new URLSearchParams(window.location.search);
     for (const key of TRACKING_PARAMS) {
       const val = params.get(key);
@@ -320,14 +368,20 @@ export function getTrackingData(): TrackingPayload {
     dataHora: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', dateStyle: 'full', timeStyle: 'short' }),
     dataISO: new Date().toISOString(),
     dispositivo: isMobile ? 'mobile' : 'desktop',
+    utmSource: stored.utm_source ?? '',
     midia: stored.utm_medium ?? '',
     campanha: stored.utm_campaign ?? '',
     conteudo: stored.utm_content ?? '',
     termo: stored.utm_term ?? '',
     gclid: stored.gclid ?? '',
+    gbraid: stored.gbraid ?? '',
+    wbraid: stored.wbraid ?? '',
+    dclid: stored.dclid ?? '',
     fbclid: stored.fbclid ?? '',
+    msclkid: stored.msclkid ?? '',
     urlOrigem: stored.url_origem ?? (typeof window !== 'undefined' ? window.location.href : ''),
-    sessionId: typeof sessionStorage !== 'undefined' ? (sessionStorage.getItem('sessionId') || 'unknown') : 'unknown',
+    referrer: typeof document !== 'undefined' ? document.referrer : '',
+    sessionId: getOrCreateSessionId(),
     timestamp: Date.now(),
     userAgent: ua,
   };

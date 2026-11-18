@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { getTrackingData } from '@/lib/tracking';
+import { getTrackingData, trackFormStart, trackFormSubmit } from '@/lib/tracking';
 import { motion } from 'framer-motion';
 import { Send, Mail, User, Phone, CheckCircle, Shield } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -72,13 +72,17 @@ export default function LeadCaptureForm({
           email: formData.email,
           mensagem: formData.message,
           newsletter: formData.newsletter,
+          receberDicas: formData.newsletter ? 'sim' : 'não',
+          contatoWhatsapp: formData.whatsapp,
           origem: 'site - formulário lead capture',
           fonte: 'lead_capture',
           ...getTrackingData(),
         }),
       });
-      if (!response.ok) throw new Error('Não foi possível enviar a solicitação.');
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) throw new Error('Não foi possível enviar a solicitação.');
 
+      trackFormSubmit('lead_capture');
       setStatus('success');
       if (onSuccess) onSuccess();
       
@@ -150,7 +154,7 @@ export default function LeadCaptureForm({
           <p className="text-[#4A3F35] font-light">{subtitle}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} onFocusCapture={() => trackFormStart('lead_capture')} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-[#4A3F35] mb-2">
