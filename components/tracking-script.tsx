@@ -1,6 +1,8 @@
 'use client';
 
 import Script from 'next/script';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useRef, Suspense } from 'react';
 import { GA_MEASUREMENT_ID } from '@/lib/tracking';
 
 declare global {
@@ -67,6 +69,33 @@ const clarityConsentLoader = [
   '})(window,document);',
 ].join('\n');
 
+function RouteTracker() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const isInitialPage = useRef(true);
+
+  useEffect(() => {
+    if (isInitialPage.current) {
+      isInitialPage.current = false;
+      return;
+    }
+
+    if (!window.__rubiaAnalyticsConsent || !window.__rubiaAnalyticsLoaded || !window.gtag) {
+      return;
+    }
+
+    const query = searchParams.toString();
+    const pagePath = pathname + (query ? '?' + query : '');
+    window.gtag('event', 'page_view', {
+      page_path: pagePath,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }, [pathname, searchParams]);
+
+  return null;
+}
+
 export default function TrackingScript() {
   if (!GA_MEASUREMENT_ID) return null;
 
@@ -81,6 +110,9 @@ export default function TrackingScript() {
       <Script id="clarity-consent-loader" strategy="afterInteractive">
         {clarityConsentLoader}
       </Script>
+      <Suspense fallback={null}>
+        <RouteTracker />
+      </Suspense>
     </>
   );
 }
