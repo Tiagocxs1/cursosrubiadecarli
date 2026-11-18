@@ -10,11 +10,14 @@ declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
     __rubiaLoadClarity?: () => void;
+    __rubiaLoadAnalytics?: () => void;
+    __rubiaAnalyticsConsent?: boolean;
   }
 }
 
 function updateGoogleConsent(state: 'accepted' | 'rejected') {
   if (typeof window === 'undefined' || !window.gtag) return;
+  window.__rubiaAnalyticsConsent = state === 'accepted';
   const granted = state === 'accepted' ? 'granted' : 'denied';
   window.gtag('consent', 'update', {
     analytics_storage: granted,
@@ -40,7 +43,10 @@ export default function CookieBanner() {
     if (stored) {
       setConsent(stored);
       updateGoogleConsent(stored);
-      if (stored === 'accepted') window.__rubiaLoadClarity?.();
+      if (stored === 'accepted') {
+        window.__rubiaLoadAnalytics?.();
+        window.__rubiaLoadClarity?.();
+      }
       return;
     }
 
@@ -53,6 +59,7 @@ export default function CookieBanner() {
     setConsent('accepted');
     updateGoogleConsent('accepted');
     setVisible(false);
+    window.__rubiaLoadAnalytics?.();
     window.__rubiaLoadClarity?.();
   }
 
