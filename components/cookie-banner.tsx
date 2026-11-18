@@ -18,12 +18,12 @@ declare global {
 function updateGoogleConsent(state: 'accepted' | 'rejected') {
   if (typeof window === 'undefined' || !window.gtag) return;
   window.__rubiaAnalyticsConsent = state === 'accepted';
-  const granted = state === 'accepted' ? 'granted' : 'denied';
   window.gtag('consent', 'update', {
-    analytics_storage: granted,
-    ad_storage: granted,
-    ad_user_data: granted,
-    ad_personalization: granted,
+    analytics_storage: state === 'accepted' ? 'granted' : 'denied',
+    // This site only uses analytics; advertising storage and ad personalization stay denied.
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
   });
 }
 
@@ -69,7 +69,6 @@ export default function CookieBanner() {
     setConsent('rejected');
     updateGoogleConsent('rejected');
     setVisible(false);
-    // Recarrega para encerrar scripts de análise que já tenham sido carregados.
     if (wasAccepted) window.location.reload();
   }
 
