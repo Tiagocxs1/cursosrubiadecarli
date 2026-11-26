@@ -135,7 +135,7 @@ export default function LeadCaptureForm({
             <CheckCircle className="w-8 h-8 text-[#D4AF37]" />
           </div>
           <h3 className="text-2xl font-bold text-[#1A1A1A] mb-2">Solicitação Enviada!</h3>
-          <p className="text-[#4A3F35] mb-4">Verifique seu WhatsApp para conversar com nossa equipe.</p>
+          <p className="text-[#4A3F35] mb-4">Recebemos sua solicitação. Nossa equipe entrará em contato pelo canal informado.</p>
           <p className="text-sm text-[#D4AF37] font-medium">Entraremos em contato em breve!</p>
         </div>
       </motion.div>
