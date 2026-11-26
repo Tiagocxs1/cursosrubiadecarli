@@ -8,7 +8,6 @@ import { getPostBySlug, getAllPostSlugs, formatDate, readingTime } from '@/lib/b
 import { buildArticleSchema, buildBreadcrumbSchema } from '@/lib/schema';
 import JsonLd from '@/components/json-ld';
 
-export const runtime = 'edge';
 
 const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
