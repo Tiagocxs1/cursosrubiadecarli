@@ -12,6 +12,31 @@ const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabase
 
 type LeadPayload = Record<string, unknown>;
 
+const CRM_BASE = 'https://tsdigitais-central-astro.tiagocxs-tdb.workers.dev';
+const CRM_FORM_KEY = 'ede60fad09cd4a5185d884e0451a1258';
+
+async function syncLeadToCentral(payload: Record<string, unknown>) {
+  let parentOrigin = 'https://cursos.rubiadecarli.com.br';
+  const sourceUrl = String(payload.urlOrigem ?? '');
+  try { parentOrigin = new URL(sourceUrl).origin; } catch {}
+  const data = {
+    nome: String(payload.nome ?? ''),
+    email: String(payload.email ?? ''),
+    phone: String(payload.whatsapp ?? ''),
+    message: String(payload.mensagem ?? ''),
+    newsletter: payload.newsletter === true,
+    whatsappConsent: payload.contatoWhatsapp === true,
+  };
+  const response = await fetch(CRM_BASE + '/api/public/forms/' + CRM_FORM_KEY + '/submissions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data, sourceUrl: sourceUrl || parentOrigin, referrerUrl: String(payload.referrer ?? ''), parentOrigin }),
+    signal: AbortSignal.timeout(10000),
+  });
+  const result = await response.json().catch(() => ({}));
+  return { ok: response.ok, error: response.ok ? null : (result.error || 'crm_http_' + response.status) };
+}
+
 function valueOf(value: unknown, maxLength = 500): string {
   if (typeof value === 'string') return value.trim().slice(0, maxLength);
   if (typeof value === 'number' && Number.isFinite(value)) return String(value);
@@ -106,6 +131,15 @@ export async function POST(req: Request) {
       userAgent: valueOf(body.userAgent, 500),
     };
 
+    let crmSynced = false;
+    try {
+      const crmResult = await syncLeadToCentral(payload);
+      crmSynced = crmResult.ok;
+      if (!crmResult.ok) console.error('Lead não sincronizado no CRM central:', crmResult.error);
+    } catch (error) {
+      console.error('Falha de conexão com o CRM central:', error);
+    }
+
     let stored = false;
     if (supabase) {
       try {
@@ -174,7 +208,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(
-      { success: true, stored, emailSent, telegramSent },
+      { success: true, stored, emailSent, telegramSent, crmSynced },
       { status: stored ? 200 : 202 },
     );
   } catch (error) {
