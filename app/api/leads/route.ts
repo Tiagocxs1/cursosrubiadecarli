@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { sendLeadEmail } from '@/lib/email';
+
+export const runtime = 'edge';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
 const supabaseKey =
@@ -189,18 +190,12 @@ export async function POST(req: Request) {
       console.error('Lead não salvo: configuração do Supabase ausente.');
     }
 
-    let emailSent = false;
-    try {
-      await sendLeadEmail(payload);
-      emailSent = true;
-    } catch (error) {
-      console.error('Falha ao enviar notificação por e-mail:', error);
-    }
+    const emailSent = false; // Notificações passam a ser tratadas pelo CRM central.
 
     const telegramSent = await sendTelegram(payload);
 
     // Nunca responder "sucesso" quando nenhum destino recebeu o lead.
-    if (!stored && !emailSent) {
+    if (!stored && !emailSent && !crmSynced) {
       return NextResponse.json(
         { success: false, error: 'Não foi possível registrar sua solicitação. Tente novamente.' },
         { status: 503 },
