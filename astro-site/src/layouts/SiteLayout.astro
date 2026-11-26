@@ -2,6 +2,7 @@
 import '../../legacy/app/globals.css';
 import '../styles/extra.css';
 import CookieBanner from '../../legacy/components/cookie-banner';
+import { ToastProvider, ConfettiProvider } from '../../legacy/components/providers';
 import { buildOrganizationSchema, buildPersonSchema } from '../../legacy/lib/schema';
 
 interface Props {
@@ -112,7 +113,11 @@ const organizationSchemas = [buildOrganizationSchema(), buildPersonSchema()];
     </script>
   </head>
   <body class="font-sans">
-    <slot />
+    <ConfettiProvider client:load />
+    <ToastProvider client:load />
+    <div class="min-h-screen flex flex-col">
+      <main class="flex-grow"><slot /></main>
+    </div>
     <CookieBanner client:load />
   </body>
 </html>
