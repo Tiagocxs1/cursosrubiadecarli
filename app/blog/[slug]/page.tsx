@@ -12,7 +12,6 @@ export const runtime = 'edge';
 
 const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarli.com.br').replace(/\\n/g, '').trim().replace(/\/+$/, '');
 
-export const revalidate = 300;
 
 interface Props {
   params: Promise<{ slug: string }>;
