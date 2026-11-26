@@ -9,12 +9,12 @@ import { buildWhatsAppUrl, openWhatsApp } from '@/lib/tracking';
 
 const content = {
   ebook: {
-    badge: "Ebook Enviado com Sucesso!",
-    title: "Seu material está a caminho",
-    description: "Verifique sua caixa de entrada — o link de download chegará em instantes.",
-    highlight: "Enquanto isso, que tal já dar o próximo passo e garantir sua vaga em um dos nossos cursos presenciais?",
+    badge: "Solicitação Recebida",
+    title: "Recebemos seu pedido do e-book",
+    description: "Seus dados foram registrados. A equipe entrará em contato para orientar o acesso ao material.",
+    highlight: "Caso prefira, você também pode falar diretamente com a equipe pelo WhatsApp.",
     cta: {
-      primary: { label: "Falar no WhatsApp", waKey: "obrigado_ebook" as const, external: true },
+      primary: { label: "Falar com a Equipe", waKey: "obrigado_ebook" as const, external: true },
       secondary: { label: "Ver os Cursos", href: "/#cursos" },
     },
   },
