@@ -4,7 +4,6 @@ import { getPublishedPosts } from '@/lib/blog';
 export const runtime = 'edge';
 
 // Revalida a cada 5 minutos para não ficar stale
-export const revalidate = 300;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
