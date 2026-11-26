@@ -1,3 +1,12 @@
 name = "rubia-cursos-astro-preview"
 compatibility_date = "2026-11-26"
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./dist"
+
+# Public, browser-safe settings mirrored from the current Next deployment.
+# No service-role key, SMTP password, Telegram token or other private secret is stored here.
+[vars]
+SUPABASE_URL = "https://cnjloqdgwjhnlecnaemb.supabase.co"
+SUPABASE_PUBLISHABLE_KEY = "sb_publishable_w-OBqIU5wgw4V1RxGHs4MQ_8m-Rs_Qm"
+SUPABASE_ORGANIZATION_ID = "CURSOS_RUBIA"
+PUBLIC_GA_MEASUREMENT_ID = "G-82N4KS233X"
