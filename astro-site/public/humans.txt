@@ -8,10 +8,10 @@ Desenvolvimento Web: Equipe Técnica
   Contato: contato@rubiadecarli.com.br
 
 /* SITE */
-Última atualização: 2026-03-28
+Última atualização: 2026-11-26
 Linguagem: Português (Brasil)
-Framework: Next.js 14 (App Router)
-Hospedagem: Vercel
+Framework: Astro 7 + React
+Hospedagem: Cloudflare Pages
 Standards: HTML5, CSS3, TypeScript
 
 /* THANKS */

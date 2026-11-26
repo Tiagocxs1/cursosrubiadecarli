@@ -2,12 +2,19 @@
 import '../../legacy/app/globals.css';
 import '../styles/extra.css';
 import CookieBanner from '../../legacy/components/cookie-banner';
+import { buildOrganizationSchema, buildPersonSchema } from '../../legacy/lib/schema';
+
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
   robots?: string;
   image?: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
 }
 const {
   title = 'Cursos Presenciais em Tricologia e Biomedicina Estética | Dra. Rúbia De Carli',
@@ -15,7 +22,14 @@ const {
   canonical = 'https://cursos.rubiadecarli.com.br/',
   robots = 'index, follow',
   image = 'https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/drarubiadecarli.jpg',
+  keywords = 'curso tricologia,curso biomedicina estética,tricologia Caxias do Sul,harmonização facial presencial,protocolo full face,Dra Rúbia De Carli,curso presencial biomédica,alopecia androgenética,bioestimuladores colágeno',
+  ogTitle = title,
+  ogDescription = description,
+  twitterTitle = title,
+  twitterDescription = description,
 } = Astro.props;
+const canonicalOg = canonical.replace(/\/+$/, '') || 'https://cursos.rubiadecarli.com.br';
+const organizationSchemas = [buildOrganizationSchema(), buildPersonSchema()];
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -25,7 +39,12 @@ const {
     <meta name="theme-color" content="#FAF9F8" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Dra. Rúbia De Carli" />
+    <meta name="creator" content="Dra. Rúbia De Carli" />
+    <meta name="publisher" content="Cursos Dra. Rúbia De Carli" />
     <meta name="robots" content={robots} />
+    <meta name="googlebot" content={robots} />
     <link rel="canonical" href={canonical} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
@@ -33,14 +52,18 @@ const {
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Cursos Dra. Rúbia De Carli" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonicalOg} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Dra. Rúbia De Carli — Cursos Presenciais" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={twitterDescription} />
     <meta name="twitter:image" content={image} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchemas)} />
     <script is:inline>
       (function(w,d){
         w.dataLayer = w.dataLayer || [];
@@ -86,13 +109,6 @@ const {
           }
         } catch(e) {}
       })(window,document);
-    </script>
-    <script is:inline>
-      window.addEventListener('load',function(){
-        if (window.__rubiaAnalyticsConsent && window.__rubiaAnalyticsLoaded && window.gtag) {
-          window.gtag('event','page_view',{page_path:location.pathname+location.search,page_location:location.href,page_title:document.title});
-        }
-      });
     </script>
   </head>
   <body class="font-sans">
