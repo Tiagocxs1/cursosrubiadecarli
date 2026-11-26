@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getPublishedPosts } from '@/lib/blog';
 
+export const runtime = 'edge';
+
 // Revalida a cada 5 minutos para não ficar stale
 export const revalidate = 300;
 
