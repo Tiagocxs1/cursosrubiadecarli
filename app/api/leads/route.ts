@@ -17,27 +17,47 @@ const CRM_BASE = 'https://tsdigitais-central-astro.tiagocxs-tdb.workers.dev';
 const CRM_FORM_KEY = 'ede60fad09cd4a5185d884e0451a1258';
 
 async function syncLeadToCentral(payload: Record<string, unknown>) {
-  let parentOrigin = 'https://cursos.rubiadecarli.com.br';
-  const sourceUrl = String(payload.urlOrigem ?? '');
-  try { parentOrigin = new URL(sourceUrl).origin; } catch {}
+  // Use the verified production origin for the CRM allowlist. Keep the actual
+  // preview/production URL as sourceUrl for audit and attribution.
+  const parentOrigin = 'https://cursos.rubiadecarli.com.br';
+  const sourceUrl = String(payload.urlOrigem ?? parentOrigin);
   const data = {
     nome: String(payload.nome ?? ''),
     email: String(payload.email ?? ''),
-    phone: String(payload.whatsapp ?? ''),
-    message: String(payload.mensagem ?? ''),
+    whatsapp: String(payload.whatsapp ?? ''),
+    telefone: String(payload.whatsapp ?? ''),
+    mensagem: String(payload.mensagem ?? ''),
+    curso: String(payload.curso ?? ''),
+    procedimento: String(payload.procedimento ?? ''),
+    origem: String(payload.origem ?? 'site'),
+    fonte: String(payload.fonte ?? 'contato_site'),
     newsletter: payload.newsletter === true,
-    whatsappConsent: payload.contatoWhatsapp === true,
+    receberDicas: payload.receberDicas === 'sim' || payload.newsletter === true,
+    contatoWhatsapp: payload.contatoWhatsapp === true,
+    consentimento: true,
   };
   const response = await fetch(CRM_BASE + '/api/public/forms/' + CRM_FORM_KEY + '/submissions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ data, sourceUrl: sourceUrl || parentOrigin, referrerUrl: String(payload.referrer ?? ''), parentOrigin }),
-    signal: AbortSignal.timeout(10000),
+    body: JSON.stringify({
+      data,
+      sourceUrl,
+      referrerUrl: String(payload.referrer ?? ''),
+      parentOrigin,
+    }),
+    signal: AbortSignal.timeout(15000),
   });
-  const result = await response.json().catch(() => ({}));
-  return { ok: response.ok, error: response.ok ? null : (result.error || 'crm_http_' + response.status) };
+  const result = await response.json().catch(() => ({})) as Record<string, unknown>;
+  const notifications = result.notifications && typeof result.notifications === 'object'
+    ? result.notifications as Record<string, unknown>
+    : {};
+  return {
+    ok: response.ok && result.ok !== false && result.success !== false,
+    error: response.ok ? null : (String(result.error || 'crm_http_' + response.status)),
+    notifications,
+    submissionId: String(result.submissionId || ''),
+  };
 }
-
 function valueOf(value: unknown, maxLength = 500): string {
   if (typeof value === 'string') return value.trim().slice(0, maxLength);
   if (typeof value === 'number' && Number.isFinite(value)) return String(value);
@@ -133,9 +153,13 @@ export async function POST(req: Request) {
     };
 
     let crmSynced = false;
+    let crmNotifications: Record<string, unknown> = {};
+    let crmSubmissionId = '';
     try {
       const crmResult = await syncLeadToCentral(payload);
       crmSynced = crmResult.ok;
+      crmNotifications = crmResult.notifications;
+      crmSubmissionId = crmResult.submissionId;
       if (!crmResult.ok) console.error('Lead não sincronizado no CRM central:', crmResult.error);
     } catch (error) {
       console.error('Falha de conexão com o CRM central:', error);
@@ -190,21 +214,30 @@ export async function POST(req: Request) {
       console.error('Lead não salvo: configuração do Supabase ausente.');
     }
 
-    const emailSent = false; // Notificações passam a ser tratadas pelo CRM central.
-
-    const telegramSent = await sendTelegram(payload);
-
-    // Nunca responder "sucesso" quando nenhum destino recebeu o lead.
-    if (!stored && !emailSent && !crmSynced) {
+    // O CRM central é o registro oficial e também executa as notificações.
+    // A tabela customers é apenas um espelho opcional: falha nela não descarta
+    // um lead que já foi gravado com sucesso no CRM.
+    if (!crmSynced) {
       return NextResponse.json(
-        { success: false, error: 'Não foi possível registrar sua solicitação. Tente novamente.' },
+        { success: false, error: 'Não foi possível registrar sua solicitação no CRM. Tente novamente.' },
         { status: 503 },
       );
     }
 
+    const emailSent = crmNotifications.email === 'sent';
+    const telegramSent = crmNotifications.telegram === 'sent';
+
     return NextResponse.json(
-      { success: true, stored, emailSent, telegramSent, crmSynced },
-      { status: stored ? 200 : 202 },
+      {
+        success: true,
+        stored,
+        crmSynced: true,
+        submissionId: crmSubmissionId,
+        emailSent,
+        telegramSent,
+        notifications: crmNotifications,
+      },
+      { status: 200 },
     );
   } catch (error) {
     console.error('Erro na rota de leads:', error);
@@ -212,43 +245,5 @@ export async function POST(req: Request) {
       { success: false, error: 'Não foi possível processar sua solicitação.' },
       { status: 500 },
     );
-  }
-}
-
-async function sendTelegram(data: Record<string, unknown>): Promise<boolean> {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!botToken || !chatId) return false;
-
-  const clean = (value: unknown) => String(value ?? '').replace(/[\\r\\n]+/g, ' ').slice(0, 500);
-  const lines = [
-    '🚀 NOVO LEAD — CURSOS DRA. RÚBIA',
-    '',
-    'Nome: ' + clean(data.nome),
-    'E-mail: ' + clean(data.email),
-    'WhatsApp: ' + clean(data.whatsapp),
-    'Assunto: ' + clean(data.procedimento),
-    'Página: ' + clean(data.urlOrigem),
-    'Origem: ' + clean(data.utmSource) + ' / ' + clean(data.midia),
-    'Campanha: ' + clean(data.campanha),
-    'Data: ' + clean(data.dataHora),
-    'Aceita newsletter: ' + (data.newsletter ? 'Sim' : 'Não'),
-    'Aceita contato WhatsApp: ' + (data.contatoWhatsapp ? 'Sim' : 'Não'),
-  ];
-
-  try {
-    const response = await fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: chatId, text: lines.join('\\n') }),
-    });
-    if (!response.ok) {
-      console.error('Telegram rejeitou a notificação:', response.status);
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.error('Falha de conexão com Telegram:', error);
-    return false;
   }
 }
