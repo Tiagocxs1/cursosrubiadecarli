@@ -1,0 +1,1 @@
+Triggering Astro Cloudflare Pages build after updating the project build command.
