@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#FAF9F8"/>
+
+  <!-- Background glow -->
+  <circle cx="400" cy="250" r="200" fill="#D4AF37" opacity="0.03"/>
+
+  <!-- Skin cross-section illustration -->
+  <!-- Epidermis layer -->
+  <rect x="160" y="130" width="480" height="60" rx="8" fill="#F5EDD8" stroke="#E8DDD5" stroke-width="1"/>
+  <text x="180" y="165" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.5" letter-spacing="1">EPIDERME</text>
+
+  <!-- Dermis layer -->
+  <rect x="160" y="190" width="480" height="110" rx="0" fill="#F0E4D0" stroke="#E8DDD5" stroke-width="1"/>
+  <text x="180" y="250" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.5" letter-spacing="1">DERME</text>
+
+  <!-- Hypodermis layer -->
+  <rect x="160" y="300" width="480" height="80" rx="0" fill="#EAD9C0" stroke="#E8DDD5" stroke-width="1"/>
+  <text x="180" y="345" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.5" letter-spacing="1">HIPODERME</text>
+
+  <!-- Collagen fibers - before (thin, sparse) -->
+  <!-- Left side - sparse -->
+  <path d="M230 200 Q250 210 240 230 Q255 240 245 260 Q260 270 250 290" stroke="#C8A87A" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <path d="M260 195 Q275 215 265 240 Q280 255 270 278 Q282 290 275 305" stroke="#C8A87A" stroke-width="1.2" fill="none" opacity="0.4"/>
+
+  <!-- Divider line -->
+  <line x1="400" y1="125" x2="400" y2="390" stroke="#D4AF37" stroke-width="1" stroke-dasharray="5 4" opacity="0.35"/>
+  <text x="290" y="115" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.5" letter-spacing="2">ANTES</text>
+  <text x="510" y="115" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#4A3F35" opacity="0.5" letter-spacing="2">DEPOIS</text>
+
+  <!-- Collagen fibers - after (thick, dense, gold) -->
+  <path d="M440 200 Q465 218 450 242 Q472 258 458 278 Q478 294 465 312" stroke="#D4AF37" stroke-width="2.2" fill="none" opacity="0.7"/>
+  <path d="M470 198 Q490 220 478 244 Q498 262 485 282 Q505 298 492 315" stroke="#D4AF37" stroke-width="2.2" fill="none" opacity="0.65"/>
+  <path d="M500 202 Q518 222 507 248 Q525 265 514 285 Q530 300 520 318" stroke="#D4AF37" stroke-width="2.2" fill="none" opacity="0.6"/>
+  <path d="M530 205 Q545 228 535 252 Q550 270 540 292 Q555 308 546 323" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.55"/>
+  <path d="M558 208 Q570 230 562 255 Q575 272 566 296" stroke="#D4AF37" stroke-width="1.8" fill="none" opacity="0.5"/>
+
+  <!-- Cross connections (fibers weave) -->
+  <path d="M450 230 Q462 225 472 232" stroke="#D4AF37" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <path d="M460 255 Q473 248 483 256" stroke="#D4AF37" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <path d="M468 278 Q480 272 492 279" stroke="#D4AF37" stroke-width="1.2" fill="none" opacity="0.4"/>
+  <path d="M476 300 Q490 295 502 302" stroke="#D4AF37" stroke-width="1.2" fill="none" opacity="0.4"/>
+
+  <!-- Stimulation particles / bioestimulator dots descending -->
+  <circle cx="510" cy="155" r="5" fill="#D4AF37" opacity="0.7"/>
+  <circle cx="532" cy="162" r="4" fill="#D4AF37" opacity="0.6"/>
+  <circle cx="488" cy="158" r="3.5" fill="#D4AF37" opacity="0.5"/>
+  <!-- Arrow down into dermis -->
+  <path d="M510 163 L510 188" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.5"/>
+  <path d="M506 185 L510 192 L514 185" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Glow effect on after side -->
+  <rect x="415" y="190" width="225" height="110" fill="#D4AF37" opacity="0.03" rx="0"/>
+
+  <!-- Bottom label -->
+  <text x="400" y="455" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#4A3F35" opacity="0.7" letter-spacing="3">BIOESTIMULADORES DE COLÁGENO</text>
+  <line x1="230" y1="463" x2="570" y2="463" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Gold corners -->
+  <path d="M30 30 L70 30 L70 34 L34 34 L34 70 L30 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 30 L730 30 L730 34 L766 34 L766 70 L770 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M30 470 L70 470 L70 466 L34 466 L34 430 L30 430 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 470 L730 470 L730 466 L766 466 L766 430 L770 430 Z" fill="#D4AF37" opacity="0.4"/>
+</svg>

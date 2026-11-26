@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#FAF9F8"/>
+  <circle cx="400" cy="250" r="200" fill="#D4AF37" opacity="0.025"/>
+
+  <!-- Dermoscopy/trichoscopy circular view frame -->
+  <circle cx="400" cy="245" r="195" fill="white" stroke="#E0D0BC" stroke-width="2"/>
+  <circle cx="400" cy="245" r="195" fill="none" stroke="#D4AF37" stroke-width="1" opacity="0.3"/>
+  <!-- Outer ring decoration -->
+  <circle cx="400" cy="245" r="205" fill="none" stroke="#D4AF37" stroke-width="0.5" stroke-dasharray="4 6" opacity="0.25"/>
+
+  <!-- ===== HAIR STRANDS - different trichosis patterns ===== -->
+
+  <!-- Normal hair shaft (for reference) - far left -->
+  <g>
+    <path d="M155 85 Q152 160 155 245 Q158 325 155 405" stroke="#3A2F25" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <text x="155" y="78" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#4A3F35" opacity="0.5" letter-spacing="1">NORMAL</text>
+  </g>
+
+  <!-- Trichorrhexis nodosa - nodes on shaft -->
+  <g>
+    <path d="M240 90 Q237 165 240 248 Q243 330 240 405" stroke="#4A3F35" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- Nodes -->
+    <ellipse cx="239" cy="155" rx="7" ry="5" fill="#4A3F35" opacity="0.8"/>
+    <ellipse cx="241" cy="215" rx="8" ry="5" fill="#4A3F35" opacity="0.8"/>
+    <ellipse cx="240" cy="280" rx="7" ry="5" fill="#4A3F35" opacity="0.8"/>
+    <ellipse cx="239" cy="345" rx="8" ry="5" fill="#4A3F35" opacity="0.8"/>
+    <text x="240" y="83" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#D4AF37" opacity="0.7" letter-spacing="0.5">NÓDOSA</text>
+  </g>
+
+  <!-- Pili torti - twisted hair -->
+  <g>
+    <path d="M332 88 Q310 130 332 165 Q354 200 332 240 Q310 275 332 315 Q354 350 332 405" stroke="#4A3F35" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <text x="332" y="81" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#D4AF37" opacity="0.7" letter-spacing="0.5">PILI TORTI</text>
+  </g>
+
+  <!-- Miniaturized hair (thin) - center -->
+  <g>
+    <path d="M400 88 Q398 165 400 248 Q402 330 400 405" stroke="#4A3F35" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" stroke-dasharray="8 2"/>
+    <text x="400" y="81" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#D4AF37" opacity="0.7" letter-spacing="0.5">MINIATURIZAÇÃO</text>
+  </g>
+
+  <!-- Trichoptilosis - split ends -->
+  <g>
+    <path d="M468 88 Q466 200 468 295" stroke="#4A3F35" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- Split end -->
+    <path d="M468 295 Q455 355 450 405" stroke="#4A3F35" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M468 295 Q480 358 486 405" stroke="#4A3F35" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <text x="468" y="81" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#D4AF37" opacity="0.7" letter-spacing="0.5">TRICOPTILOSE</text>
+  </g>
+
+  <!-- Monilethrix - beaded hair -->
+  <g>
+    <path d="M555 88 Q553 248 555 405" stroke="#4A3F35" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.3"/>
+    <!-- Beads -->
+    <ellipse cx="555" cy="108" rx="5" ry="7" fill="#4A3F35" opacity="0.75"/>
+    <ellipse cx="555" cy="130" rx="3" ry="4" fill="#4A3F35" opacity="0.4"/>
+    <ellipse cx="555" cy="152" rx="5" ry="7" fill="#4A3F35" opacity="0.75"/>
+    <ellipse cx="555" cy="174" rx="3" ry="4" fill="#4A3F35" opacity="0.4"/>
+    <ellipse cx="555" cy="196" rx="5" ry="7" fill="#4A3F35" opacity="0.75"/>
+    <ellipse cx="555" cy="218" rx="3" ry="4" fill="#4A3F35" opacity="0.4"/>
+    <ellipse cx="555" cy="240" rx="5" ry="7" fill="#4A3F35" opacity="0.75"/>
+    <ellipse cx="555" cy="262" rx="3" ry="4" fill="#4A3F35" opacity="0.4"/>
+    <ellipse cx="555" cy="284" rx="5" ry="7" fill="#4A3F35" opacity="0.75"/>
+    <ellipse cx="555" cy="306" rx="3" ry="4" fill="#4A3F35" opacity="0.4"/>
+    <ellipse cx="555" cy="328" rx="5" ry="7" fill="#4A3F35" opacity="0.75"/>
+    <ellipse cx="555" cy="350" rx="3" ry="4" fill="#4A3F35" opacity="0.4"/>
+    <ellipse cx="555" cy="372" rx="5" ry="7" fill="#4A3F35" opacity="0.75"/>
+    <ellipse cx="555" cy="394" rx="3" ry="4" fill="#4A3F35" opacity="0.4"/>
+    <text x="555" y="81" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#D4AF37" opacity="0.7" letter-spacing="0.5">MONILETHRIX</text>
+  </g>
+
+  <!-- Trichoclasis - fragile/broken -->
+  <g>
+    <path d="M645 88 Q643 170 645 232" stroke="#4A3F35" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <!-- Break -->
+    <path d="M638 238 L652 226" stroke="#4A3F35" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M645 232 Q650 270 648 320" stroke="#4A3F35" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.5" stroke-dasharray="5 4"/>
+    <text x="645" y="81" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#D4AF37" opacity="0.7" letter-spacing="0.5">TRICOCLASE</text>
+  </g>
+
+  <!-- Trichoscopy magnifier icon (small, decorative) -->
+  <circle cx="680" cy="390" r="25" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.3"/>
+  <line x1="698" y1="408" x2="710" y2="420" stroke="#D4AF37" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+
+  <!-- Bottom label -->
+  <text x="400" y="457" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#4A3F35" opacity="0.7" letter-spacing="3">TRICOSES — ANOMALIAS DA HASTE</text>
+  <line x1="215" y1="465" x2="585" y2="465" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Gold corners -->
+  <path d="M30 30 L70 30 L70 34 L34 34 L34 70 L30 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 30 L730 30 L730 34 L766 34 L766 70 L770 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M30 470 L70 470 L70 466 L34 466 L34 430 L30 430 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 470 L730 470 L730 466 L766 466 L766 430 L770 430 Z" fill="#D4AF37" opacity="0.4"/>
+</svg>

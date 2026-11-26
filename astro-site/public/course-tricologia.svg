@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#FAF9F8"/>
+  <circle cx="400" cy="250" r="230" fill="#D4AF37" opacity="0.03"/>
+  <circle cx="620" cy="100" r="140" fill="#D4AF37" opacity="0.04"/>
+
+  <!-- Scalp cross-section base -->
+  <rect x="120" y="150" width="560" height="220" rx="12" fill="#F0E4D0" stroke="#E8DDD5" stroke-width="1.2"/>
+
+  <!-- Skin layers -->
+  <rect x="120" y="150" width="560" height="45" rx="12" fill="#F5EDD8" stroke="none"/>
+  <text x="680" y="178" font-family="Georgia, serif" font-size="10" fill="#4A3F35" opacity="0.4" text-anchor="end" letter-spacing="1">COURO CABELUDO</text>
+
+  <!-- 5 hair follicles -->
+  <!-- Follicle 1 -->
+  <g transform="translate(185, 150)">
+    <!-- Hair shaft -->
+    <path d="M0 0 Q-8 -55 -3 -105" stroke="#4A3F35" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Follicle outer -->
+    <ellipse cx="-1" cy="85" rx="18" ry="55" fill="#E8D4B8" stroke="#D4AF37" stroke-width="1.2" opacity="0.7"/>
+    <!-- Inner root sheath -->
+    <ellipse cx="-1" cy="85" rx="10" ry="45" fill="#F0E0C8" opacity="0.8"/>
+    <!-- Papilla -->
+    <ellipse cx="-1" cy="128" rx="10" ry="8" fill="#D4AF37" opacity="0.5"/>
+    <!-- Sebaceous gland -->
+    <ellipse cx="14" cy="55" rx="12" ry="9" fill="#D4AF37" opacity="0.2" stroke="#D4AF37" stroke-width="0.8"/>
+    <!-- Arrector pili -->
+    <path d="M16 45 Q25 80 20 110" stroke="#C4A078" stroke-width="1.2" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- Follicle 2 -->
+  <g transform="translate(285, 150)">
+    <path d="M0 0 Q5 -50 2 -108" stroke="#4A3F35" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+    <ellipse cx="1" cy="85" rx="18" ry="55" fill="#E8D4B8" stroke="#D4AF37" stroke-width="1.2" opacity="0.7"/>
+    <ellipse cx="1" cy="85" rx="10" ry="45" fill="#F0E0C8" opacity="0.8"/>
+    <ellipse cx="1" cy="128" rx="10" ry="8" fill="#D4AF37" opacity="0.5"/>
+    <ellipse cx="17" cy="55" rx="12" ry="9" fill="#D4AF37" opacity="0.2" stroke="#D4AF37" stroke-width="0.8"/>
+    <path d="M18 45 Q26 80 22 112" stroke="#C4A078" stroke-width="1.2" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- Follicle 3 - center, biggest -->
+  <g transform="translate(400, 150)">
+    <path d="M0 0 Q-5 -52 1 -112" stroke="#3A2F25" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+    <ellipse cx="0" cy="88" rx="20" ry="58" fill="#E0C8A8" stroke="#D4AF37" stroke-width="1.5" opacity="0.8"/>
+    <ellipse cx="0" cy="88" rx="11" ry="47" fill="#ECD8B8" opacity="0.9"/>
+    <ellipse cx="0" cy="133" rx="11" ry="9" fill="#D4AF37" opacity="0.65"/>
+    <ellipse cx="18" cy="56" rx="13" ry="10" fill="#D4AF37" opacity="0.25" stroke="#D4AF37" stroke-width="1"/>
+    <path d="M19 46 Q28 82 24 114" stroke="#C4A078" stroke-width="1.3" fill="none" opacity="0.45"/>
+  </g>
+
+  <!-- Follicle 4 -->
+  <g transform="translate(515, 150)">
+    <path d="M0 0 Q8 -48 4 -106" stroke="#4A3F35" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="2" cy="85" rx="18" ry="55" fill="#E8D4B8" stroke="#D4AF37" stroke-width="1.2" opacity="0.7"/>
+    <ellipse cx="2" cy="85" rx="10" ry="45" fill="#F0E0C8" opacity="0.8"/>
+    <ellipse cx="2" cy="128" rx="10" ry="8" fill="#D4AF37" opacity="0.5"/>
+    <ellipse cx="18" cy="55" rx="12" ry="9" fill="#D4AF37" opacity="0.2" stroke="#D4AF37" stroke-width="0.8"/>
+    <path d="M19 44 Q27 79 23 110" stroke="#C4A078" stroke-width="1.2" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- Follicle 5 -->
+  <g transform="translate(615, 150)">
+    <path d="M0 0 Q-6 -53 -2 -104" stroke="#4A3F35" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+    <ellipse cx="-1" cy="82" rx="17" ry="52" fill="#E8D4B8" stroke="#D4AF37" stroke-width="1.2" opacity="0.65"/>
+    <ellipse cx="-1" cy="82" rx="9" ry="43" fill="#F0E0C8" opacity="0.8"/>
+    <ellipse cx="-1" cy="122" rx="9" ry="7" fill="#D4AF37" opacity="0.45"/>
+    <ellipse cx="13" cy="53" rx="11" ry="8" fill="#D4AF37" opacity="0.2" stroke="#D4AF37" stroke-width="0.8"/>
+  </g>
+
+  <!-- Blood vessel at base -->
+  <path d="M130 365 Q260 355 400 360 Q540 365 670 355" stroke="#C4907A" stroke-width="3" fill="none" opacity="0.35" stroke-linecap="round"/>
+  <!-- Capillaries -->
+  <path d="M185 355 L185 340" stroke="#C4907A" stroke-width="1.5" opacity="0.3"/>
+  <path d="M285 355 L285 338" stroke="#C4907A" stroke-width="1.5" opacity="0.3"/>
+  <path d="M400 358 L400 340" stroke="#C4907A" stroke-width="1.5" opacity="0.3"/>
+  <path d="M515 355 L515 337" stroke="#C4907A" stroke-width="1.5" opacity="0.3"/>
+  <path d="M615 353 L615 338" stroke="#C4907A" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Dermoscopy circle overlay (trichoscopy tool suggestion) -->
+  <circle cx="400" cy="250" r="105" stroke="#D4AF37" stroke-width="1" stroke-dasharray="6 4" opacity="0.2"/>
+
+  <!-- Label -->
+  <text x="400" y="455" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#4A3F35" opacity="0.7" letter-spacing="3">TRICOLOGIA ESSENCIAL</text>
+  <line x1="295" y1="463" x2="505" y2="463" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Gold corners -->
+  <path d="M30 30 L70 30 L70 34 L34 34 L34 70 L30 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 30 L730 30 L730 34 L766 34 L766 70 L770 70 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M30 470 L70 470 L70 466 L34 466 L34 430 L30 430 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M770 470 L730 470 L730 466 L766 466 L766 430 L770 430 Z" fill="#D4AF37" opacity="0.4"/>
+</svg>

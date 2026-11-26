@@ -1,0 +1,18 @@
+/* TEAM */
+Instrutora e Conteúdo: Dra. Rúbia De Carli
+  Registro: CRBM 2144
+  Especialização: Tricologia (IAT) e Biomedicina Estética
+  Localização: Caxias do Sul, RS — Brasil
+
+Desenvolvimento Web: Equipe Técnica
+  Contato: contato@rubiadecarli.com.br
+
+/* SITE */
+Última atualização: 2026-03-28
+Linguagem: Português (Brasil)
+Framework: Next.js 14 (App Router)
+Hospedagem: Vercel
+Standards: HTML5, CSS3, TypeScript
+
+/* THANKS */
+A todas as alunas e profissionais de saúde que confiam no trabalho da Dra. Rúbia De Carli.

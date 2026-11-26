@@ -1,0 +1,101 @@
+---
+import '../styles/extra.css';
+import CookieBanner from '../../legacy/components/cookie-banner';
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  robots?: string;
+  image?: string;
+}
+const {
+  title = 'Cursos Presenciais em Tricologia e Biomedicina Estética | Dra. Rúbia De Carli',
+  description = 'Cursos presenciais em Tricologia e Biomedicina Estética em Caxias do Sul, RS. Formação com certificação, aula prática e mais de 500 alunos formados. Dra. Rúbia De Carli, CRBM 2144.',
+  canonical = 'https://cursos.rubiadecarli.com.br/',
+  robots = 'index, follow',
+  image = 'https://res.cloudinary.com/dhfek3urm/image/upload/cursos-rubiadecarli/drarubiadecarli.jpg',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FAF9F8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Cursos Dra. Rúbia De Carli" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <script is:inline>
+      (function(w,d){
+        w.dataLayer = w.dataLayer || [];
+        w.gtag = w.gtag || function(){ w.dataLayer.push(arguments); };
+        w.gtag('consent','default',{
+          analytics_storage:'denied',
+          ad_storage:'denied',
+          ad_user_data:'denied',
+          ad_personalization:'denied',
+          wait_for_update:500
+        });
+        w.__rubiaAnalyticsConsent = false;
+        w.__rubiaLoadAnalytics = function(){
+          if (w.__rubiaAnalyticsLoaded) return;
+          w.__rubiaAnalyticsLoaded = true;
+          var s=d.createElement('script');
+          s.async=true;
+          s.src='https://www.googletagmanager.com/gtag/js?id=G-82N4KS233X';
+          s.onload=function(){
+            w.gtag('js',new Date());
+            w.gtag('config','G-82N4KS233X',{send_page_view:true,anonymize_ip:true});
+          };
+          s.onerror=function(){w.__rubiaAnalyticsLoaded=false;};
+          d.head.appendChild(s);
+        };
+        w.__rubiaLoadClarity = function(){
+          try {
+            if (localStorage.getItem('rubia_cookie_consent') !== 'accepted' || w.__rubiaClarityLoaded) return;
+            w.__rubiaClarityLoaded = true;
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(w,d,'clarity','script','w66ija79qj');
+          } catch(e) {}
+        };
+        try {
+          if (localStorage.getItem('rubia_cookie_consent') === 'accepted') {
+            w.__rubiaAnalyticsConsent = true;
+            w.gtag('consent','update',{analytics_storage:'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+            w.__rubiaLoadAnalytics();
+            w.__rubiaLoadClarity();
+          }
+        } catch(e) {}
+      })(window,document);
+    </script>
+    <script is:inline>
+      window.addEventListener('load',function(){
+        if (window.__rubiaAnalyticsConsent && window.__rubiaAnalyticsLoaded && window.gtag) {
+          window.gtag('event','page_view',{page_path:location.pathname+location.search,page_location:location.href,page_title:document.title});
+        }
+      });
+    </script>
+  </head>
+  <body class="font-sans">
+    <slot />
+    <CookieBanner client:load />
+  </body>
+</html>
