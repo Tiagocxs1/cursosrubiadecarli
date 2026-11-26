@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, Tag, ArrowLeft } from 'lucide-react';
 import sanitizeHtml from 'sanitize-html';
-import { getPostBySlug, getAllPostSlugs, formatDate, readingTime } from '@/lib/blog';
+import { getPostBySlug, formatDate, readingTime } from '@/lib/blog';
 import { buildArticleSchema, buildBreadcrumbSchema } from '@/lib/schema';
 import JsonLd from '@/components/json-ld';
 
@@ -14,11 +14,6 @@ const BASE_URL = (process.env.NEXT_PUBLIC_APP_URL || 'https://cursos.rubiadecarl
 
 interface Props {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const slugs = await getAllPostSlugs();
-  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
